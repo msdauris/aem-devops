@@ -7,10 +7,10 @@
 [Question text goes here]
 
 ## Options
-A) [Option text]
-B) [Option text]
-C) [Option text]
-D) [Option text]
+A) [Option text]  <br /> 
+B) [Option text]  <br /> 
+C) [Option text]  <br /> 
+D) [Option text]  <br /> 
 
 ## Correct Answer
 [Letter of correct option]
