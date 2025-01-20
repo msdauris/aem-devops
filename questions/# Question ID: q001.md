@@ -4,7 +4,7 @@
 [Platform Basics/Authoring/Development/Maintenance]
 
 ## Question
-What tool must be used to run the offline compaction
+What tool must be used to run the offline compaction?
 
 ## Options
 A) oak-run jar
