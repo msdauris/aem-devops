@@ -32,6 +32,21 @@ Found a mistake or want to add more questions? Feel free to:
 
 Personal use only - not for distribution
 
+Progress Tracking
+Total Questions: 117
+Daily Goal: 15 questions
+Target Completion: 8 days
+Daily Progress
+
+ Day 1: Questions 1-15
+ Day 2: Questions 16-30
+ Day 3: Questions 31-45
+ Day 4: Questions 46-60
+ Day 5: Questions 61-75
+ Day 6: Questions 76-90
+ Day 7: Questions 91-105
+ Day 8: Questions 106-117
+
 ## Contact
 
 Emma Dauris soyred@protonmail.com
