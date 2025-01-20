@@ -23,7 +23,7 @@ oak-run jar
 - [Additional resource links]
 
 ## Tags
-#concept-tag1 #concept-tag2
+#tools #concept-tag2
 
 ## Difficulty
 [Easy/Medium/Hard]

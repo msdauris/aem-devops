@@ -1,0 +1,34 @@
+# Question ID: q003
+
+## Category
+[Platform Basics/Authoring/Development/Maintenance]
+
+## Question
+A devops engineer needs to perform offline maintenance on a publish instance. Which step should the devops engineer take regarding replication of content?
+
+## Options
+A) Pause the replication queue to allow items to queue
+B) Disable the replication agent for the publish instance
+C) Deactivate
+D) Delete
+
+## Correct Answer
+Disable the replication agent for the publish instance? 
+
+## Explanation
+
+
+
+
+## Related Concepts
+- https://www.gratisexam.com/adobe/ad0-e106/Adobe.PracticeTest.AD0-E106.v2020-09-07.by.Bridget.28q.pdf 
+- https://www.pass4success.com/adobe/discussions/exam-ad0-e106-topic-12-question-2-discussion
+
+## Tags
+# # #
+
+## Difficulty
+[Easy/Medium/Hard]
+
+## Notes
+[Personal notes or observations about this question]

@@ -1,0 +1,34 @@
+# Question ID: q002
+
+## Category
+[Platform Basics/Authoring/Development/Maintenance]
+
+## Question
+A devops enegineer configures a delay in the out of the box online backup. What is the result of a delay this is too large?
+
+## Options
+A) Excessive reads of the repo occur
+B) The backup takes more than 24 hours
+C) [Option text]
+D) [Option text]
+
+## Correct Answer
+The backup takes more than 24 hours
+
+## Explanation
+Delay Indicates a time delay (in milliseconds), so that repository performance is not affected. By default, the repository backup runs at full speed. You can slow down creating an online backup, so that it does not slow down other tasks.
+
+When using a very large delay, ensure that online backup does not take more than 24 hours. If it did, discard this backup, as it may not contain all binaries.
+
+## Related Concepts
+- https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/operations/backup-and-restore
+- [Additional resource links]
+
+## Tags
+#delay #ootb #backup
+
+## Difficulty
+[Easy/Medium/Hard]
+
+## Notes
+[Personal notes or observations about this question]
