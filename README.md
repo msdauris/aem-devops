@@ -4,8 +4,8 @@ A personal collection of practice questions and study notes for the Adobe Experi
 
 ## Repository Structure
 
-- `/questions/` - Practice questions organized by exam sections
-- `/study-notes/` - Related study materials and concept explanations
+- [questions](https://github.com/msdauris/aem-devops/blob/main/questions/)    - Practice questions organized by exam sections
+- [images](https://github.com/msdauris/aem-devops/blob/main/images/)    - Related study materials and concept explanations
 
 ## How to Use
 
@@ -38,14 +38,15 @@ Daily Goal: 15 questions
 Target Completion: 8 days
 Daily Progress
 
- Day 1: Questions 1-15
- Day 2: Questions 16-30
- Day 3: Questions 31-45
- Day 4: Questions 46-60
- Day 5: Questions 61-75
- Day 6: Questions 76-90
- Day 7: Questions 91-105
- Day 8: Questions 106-117
+ :white_check_mark: Day 1: Questions 1-15   <br />
+ Day 2: Questions 16-30  <br /> 
+ Day 3: Questions 31-45  <br /> 
+ Day 4: Questions 46-60  <br /> 
+ Day 5: Questions 61-75  <br /> 
+ Day 6: Questions 76-90  <br /> 
+ Day 7: Questions 91-105  <br /> 
+ Day 8: Questions 106-117  <br /> 
+ Day 9: Additional Qs  <br /> 
 
 ## Contact
 
