@@ -9,17 +9,15 @@ A personal collection of practice questions and study notes for the Adobe Experi
 
 ## How to Use
 
-1. Questions are organized by topic in the `/questions/` directory
+1. Questions are organized by topic in the [questions](https://github.com/msdauris/aem-devops/blob/main/questions/) directory
 2. Each question has:
    - Multiple choice options
    - Correct answer
    - Detailed explanation
    - Links to related study materials
 
-3. Study notes in `/study-notes/` contain:
-   - Core concepts
+3. Study notes in [images](https://github.com/msdauris/aem-devops/blob/main/images/) contain:
    - Diagrams
-   - Resource links
 
 ## Contributing
 
