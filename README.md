@@ -37,7 +37,7 @@ Target Completion: 8 days
 Daily Progress
 
  :white_check_mark: Day 1: Questions 1-15   <br />
- Day 2: Questions 16-30  <br /> 
+ :white_check_mark: Day 2: Questions 16-30  <br /> 
  Day 3: Questions 31-45  <br /> 
  Day 4: Questions 46-60  <br /> 
  Day 5: Questions 61-75  <br /> 
