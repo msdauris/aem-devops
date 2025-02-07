@@ -41,7 +41,7 @@ Daily Progress
  :white_check_mark: Day 3: Questions 31-45  <br /> 
  :white_check_mark: Day 4: Questions 46-60  <br /> 
  :white_check_mark: Day 5: Questions 61-75  <br /> 
- Day 6: Questions 76-90  <br /> 
+ :white_check_mark: Day 6: Questions 76-90  <br /> 
  Day 7: Questions 91-105  <br /> 
  Day 8: Questions 106-117  <br /> 
  Day 9: Additional Qs  <br /> 
