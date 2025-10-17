@@ -1,0 +1,1907 @@
+{
+  "metadata": {
+    "title": "AEM DevOps Exam Questions - Complete Review",
+    "total_questions": 117,
+    "version": "1.0",
+    "description": "Complete set of AEM DevOps exam questions reviewed for technical accuracy and reformatted for study preparation"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "topic": "CRX/Oak",
+      "type": "Flashcard",
+      "difficulty": "Easy",
+      "question": "What tool must be used to run the offline compaction?",
+      "options": {
+        "A": "oak-run jar",
+        "B": "AEM Web Console",
+        "C": "CRXDE Lite",
+        "D": "Package Manager"
+      },
+      "correct_answer": "A",
+      "explanation": "The oak-run jar tool is specifically designed for offline repository maintenance operations including compaction. It provides low-level access to the Oak repository for operations that cannot be performed while AEM is running.",
+      "study_notes": "Memorize: oak-run jar for offline compaction"
+    },
+    {
+      "id": "Q2",
+      "topic": "Maintenance",
+      "type": "Flashcard",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer configures a delay in the out-of-the-box online backup. What is the result of a delay that is too large?",
+      "options": {
+        "A": "Excessive reads of the repository occur",
+        "B": "The backup takes more than 24 hours",
+        "C": "The backup fails immediately",
+        "D": "Repository performance improves"
+      },
+      "correct_answer": "B",
+      "explanation": "When using a very large delay in online backup configuration, the backup process becomes extremely slow. Adobe recommends that online backups should not take more than 24 hours, as backups exceeding this timeframe may not contain all binaries and should be discarded.",
+      "study_notes": "Key fact: Online backups should not exceed 24 hours"
+    },
+    {
+      "id": "Q3",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to perform offline maintenance on a publish instance. Which step should the DevOps engineer take regarding replication of content?",
+      "options": {
+        "A": "Pause the replication queue to allow items to queue",
+        "B": "Disable the replication agent for the publish instance",
+        "C": "Deactivate the replication agent",
+        "D": "Delete the replication agent"
+      },
+      "correct_answer": "B",
+      "explanation": "When performing offline maintenance on a publish instance, the replication agent should be disabled to prevent replication attempts to an unavailable target. This prevents replication failures and queue buildup during maintenance windows.",
+      "study_notes": "Think: Prevent replication to unavailable target"
+    },
+    {
+      "id": "Q4",
+      "topic": "CRX/Oak",
+      "type": "INVALID",
+      "difficulty": "INVALID",
+      "question": "A DevOps engineer needs to change the default size for a tar file to 512MB. Which option should be used to enable this configuration?",
+      "options": {
+        "A": "Set changeSize property to 512 in DocumentNodeStoreService.config",
+        "B": "Set tarmk.size property to 512 in SegmentNodeStoreService.config",
+        "C": "Set Segment cache size property to 512 in Oak Segment TAR NodeStore Service",
+        "D": "Set NodeState cache property to 512 in Document NodeStore Service"
+      },
+      "correct_answer": "INVALID",
+      "explanation": "This question is invalid because the maximum tar file size in Oak is 256MB and cannot be increased to 512MB. The question tests knowledge of a configuration that doesn't exist in practice.",
+      "study_notes": "REMOVE: This question tests non-existent functionality"
+    },
+    {
+      "id": "Q5",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer notices that existing pages are not updated through package installation. The updated pages are present after deleting the pages that are not updating and reinstalling the package. What is the source of the problem?",
+      "options": {
+        "A": "Update mode is set",
+        "B": "Install mode is set",
+        "C": "Merge mode is set",
+        "D": "Replace mode is set"
+      },
+      "correct_answer": "C",
+      "explanation": "When merge mode is set, existing content is not modified - only new content is added and none is deleted or modified. This prevents updates to existing pages, which is why deleting and reinstalling works (it removes the old content first).",
+      "study_notes": "Key concept: Merge mode prevents updates to existing content"
+    },
+    {
+      "id": "Q6",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "An HTML page is published and accessible through the dispatcher. A client is trying to access the updated page but is not getting the updated content. Given: Cache-Control: max-age=3600 header is set for HTML requests. Why does the content fail to update on the client side?",
+      "options": {
+        "A": "The content is still cached in the dispatcher after the CDN flush",
+        "B": "The file was cached on the client side in the browser cache",
+        "C": "The flush occurred before content was replicated due to queue backlog",
+        "D": "There is no /invalidate section to invalidate updated content"
+      },
+      "correct_answer": "B",
+      "explanation": "The Cache-Control: max-age=3600 header explicitly tells browsers to cache the content for 1 hour (3600 seconds). This prevents the browser from checking for updates regardless of server-side cache status, which is why the client cannot see updates even after CDN flush.",
+      "study_notes": "Critical: Browser cache headers override server-side cache management"
+    },
+    {
+      "id": "Q7",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "During security tests, AEM-specific paths were accessible on the publish instance that should not be accessible to the public. What is the best practice configuration on a publish dispatcher instance?",
+      "options": {
+        "A": "/0001 {/type \"deny\" /url \"/system/*\"}",
+        "B": "/0001 {/type \"deny\" /url \"/crx/*\"}",
+        "C": "/0001 {/type \"deny\" /glob \"/system/*\"}",
+        "D": "/0001 {/type \"deny\" /glob \"*\"}"
+      },
+      "correct_answer": "D",
+      "explanation": "The best practice is to deny everything first with /0001 {/type \"deny\" /glob \"*\"} and then explicitly allow only the content that should be publicly accessible. This follows the principle of \"deny by default, allow by exception\" for maximum security.",
+      "study_notes": "Security principle: Deny by default, allow by exception"
+    },
+    {
+      "id": "Q8",
+      "topic": "Deployment",
+      "type": "Flashcard",
+      "difficulty": "Easy",
+      "question": "Assuming the project was generated using the AEM Maven archetype, which Maven command triggers the build and deployment of a content package to a publish instance?",
+      "options": {
+        "A": "mvn install -PautoInstallPackagePublish",
+        "B": "mvn install -PautoInstallBundle",
+        "C": "mvn install -PautoInstallPackage",
+        "D": "mvn install deploy -Pmode=autoInstallPackage"
+      },
+      "correct_answer": "A",
+      "explanation": "The -PautoInstallPackagePublish profile builds and installs the package directly to the publisher instance. This is used when you want to deploy content packages directly to the publish server, bypassing the author instance.",
+      "study_notes": "Memorize: -PautoInstallPackagePublish for publish deployment"
+    },
+    {
+      "id": "Q9",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "How can a DevOps Engineer limit access to certain pages in the AEM Publish instance?",
+      "options": {
+        "A": "Use the security features of Adobe Drive",
+        "B": "Use the AEM External Login Module",
+        "C": "Use Closed User Groups (CUGs)",
+        "D": "Use Access Control Lists for the authors"
+      },
+      "correct_answer": "C",
+      "explanation": "Closed User Groups (CUGs) are specifically designed to restrict access to specific pages in the publish environment. They require users to log in to view certain content and are commonly used for member-only sections of websites.",
+      "study_notes": "Key concept: CUGs for publish-side page restrictions"
+    },
+    {
+      "id": "Q10",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "A custom servlet will be called by end users, but it is unauthorized. The dispatcher includes a filter rule to allow the path, correct permissions are granted, and the servlet path is /system/public/post. What action must the DevOps Engineer take to make the servlet accessible?",
+      "options": {
+        "A": "Change the anonymous user name in Apache Sling Authentication Service configuration",
+        "B": "Configure the anonymous user inside AEM security permissions tab",
+        "C": "Add a new authentication configuration for the servlet agent under /etc/servlets",
+        "D": "Add the servlet path to Apache Sling Authentication Service configuration"
+      },
+      "correct_answer": "D",
+      "explanation": "To make a servlet accessible without authentication, the servlet path must be added to the Apache Sling Authentication Service configuration's \"Authentication Requirements\" property with a minus sign prefix (e.g., -/system/public/post) to exclude it from authentication requirements.",
+      "study_notes": "Technical detail: Use minus prefix in Authentication Requirements to exclude paths"
+    },
+    {
+      "id": "Q11",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "An AEM publish instance is running slower than expected with high page load times and degrading performance over time. A DevOps Engineer identified long-running search requests. Which step should be taken to resolve this issue?",
+      "options": {
+        "A": "Create new Lucene Index definitions to include OOTB and custom properties",
+        "B": "Integrate SOLR Search Index with AEM",
+        "C": "Modify the search component to use Core Components and leverage Index definitions",
+        "D": "Use /allowedClients in dispatcher.any to cache requests with URL parameter q"
+      },
+      "correct_answer": "B",
+      "explanation": "SOLR is an external search platform that provides better performance for large-scale search operations. It handles concurrent search requests more efficiently and provides faster response times than the built-in Lucene indexes, making it ideal for resolving search performance issues.",
+      "study_notes": "Performance solution: SOLR for large-scale search operations"
+    },
+    {
+      "id": "Q12",
+      "topic": "CI/CD",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Which gate needs to be passed after the code is deployed?",
+      "options": {
+        "A": "Performance test gate",
+        "B": "Compilation test gate",
+        "C": "Code quality test gate",
+        "D": "Unit test gate"
+      },
+      "correct_answer": "A",
+      "explanation": "Performance testing requires a fully deployed and running system to test actual user experience, response times, and system behavior under load. Compilation, unit tests, and code quality checks all occur before deployment.",
+      "study_notes": "Pipeline concept: Performance testing requires deployed system"
+    },
+    {
+      "id": "Q13",
+      "topic": "CI/CD",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "In addition to manual start, what two triggers can a DevOps Engineer define to start the CI/CD pipeline? (Choose two.)",
+      "options": {
+        "A": "Offline start",
+        "B": "On Git changes",
+        "C": "Scheduled start",
+        "D": "Data store changes"
+      },
+      "correct_answer": "B and C",
+      "explanation": "Git changes trigger automated builds when code is committed to the repository, while scheduled starts allow for time-based triggers for regular maintenance builds. These are the two most common automated trigger types for CI/CD pipelines.",
+      "study_notes": "CI/CD triggers: Git changes and scheduled starts"
+    },
+    {
+      "id": "Q14",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "An end user reports performance issues on the site. The AEM environment uses a CDN and dispatcher as caching layers, and the number of requests on the publish instance has increased significantly. Which metric can be monitored to see trends related to the problem early enough to react?",
+      "options": {
+        "A": "\"Current cache hit ratio\" in the dispatcher.log",
+        "B": "Offload metric in the CDN",
+        "C": "\"Recent requests\" in AEM",
+        "D": "Output from the request.log measuring response time"
+      },
+      "correct_answer": "A",
+      "explanation": "The cache hit ratio is an early warning indicator that shows caching effectiveness. A decreasing cache hit ratio indicates that more requests are bypassing the cache and hitting the publish instance, which precedes performance issues.",
+      "study_notes": "Monitoring concept: Cache hit ratio as early warning indicator"
+    },
+    {
+      "id": "Q15",
+      "topic": "Maintenance",
+      "type": "Flashcard",
+      "difficulty": "Easy",
+      "question": "How often is a full online compaction (revision cleanup) run by default?",
+      "options": {
+        "A": "Every month",
+        "B": "Every week",
+        "C": "Every 2 weeks",
+        "D": "Every 2 months"
+      },
+      "correct_answer": "Once per day",
+      "explanation": "According to Adobe documentation, full online compaction runs once per day by default. This is configured in the Operations Dashboard and is essential for maintaining repository health and performance.",
+      "study_notes": "Memorize: Online compaction runs once per day by default"
+    },
+    {
+      "id": "Q16",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A client is submitting a form that contains a CSRF token passed using the CSRF-Token HTTP header. The header is visible in web server access logs but not present in the AEM instance request. What should the DevOps Engineer configure to make the values available on the AEM instance?",
+      "options": {
+        "A": "Add /clientheaders { \"CSRF-Token\" } in the dispatcher configuration",
+        "B": "Add X-Forwarded-Header: CSRF-Token in the virtual host configuration",
+        "C": "Add Header set CSRF-Token in the virtual host configuration",
+        "D": "Add /filter /0001{/type \"allow\" /glob \"CSRF-Token\"} in the dispatcher configuration"
+      },
+      "correct_answer": "A",
+      "explanation": "The /clientheaders section in dispatcher.any explicitly tells the dispatcher to forward specific headers to AEM. Adding \"CSRF-Token\" to this section will make the CSRF token available in AEM requests.",
+      "study_notes": "Dispatcher config: /clientheaders forwards headers to AEM"
+    },
+    {
+      "id": "Q17",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer is migrating an AEM 6.2 instance with a large content repository to AEM as a Cloud Service. The DevOps engineer must prepare the instance to move existing content via the Content Transfer Tool. Which two actions is the DevOps engineer required to perform? (Choose two.)",
+      "options": {
+        "A": "Refactor the application code",
+        "B": "Upgrade the instance to AEM 6.5",
+        "C": "Review total index size",
+        "D": "Install the latest AEM Service Packs"
+      },
+      "correct_answer": "B and C",
+      "explanation": "The Content Transfer Tool requires a minimum of AEM 6.5, so upgrading from 6.2 is mandatory. Reviewing the total index size is also required because Cloud Service uses a different indexing approach, and index size affects migration planning.",
+      "study_notes": "Migration requirements: AEM 6.5 minimum and index size review"
+    },
+    {
+      "id": "Q18",
+      "topic": "OSGi",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "A page cannot be rendered (HTTP response 500). The log file shows a NullPointerException. The source code points to a missing OSGi service \"NavigationService\" that uses @Reference to inject this service. What are four possible causes of this issue? (Choose four.)",
+      "options": {
+        "A": "The bundle containing the NavigationService implementation is in state INSTALLED",
+        "B": "The bundle containing the NavigationService implementation is in state ACTIVE",
+        "C": "The bundle containing the NavigationService implementation is in state RESOLVED",
+        "D": "The implementation of the SCR component has unsatisfied references"
+      },
+      "correct_answer": "The bundle shows different versions in \"Bundle Location\" compared to \"Version\" in Felix Console",
+      "explanation": "The interface NavigationService and implementation reside in different bundles",
+      "study_notes": "The @Reference annotation was invalidly used in a class that is not an SCR component"
+    },
+    {
+      "id": "Q19",
+      "topic": "CI/CD",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps Engineer is configuring a non-production deployment pipeline. Code quality is checked in the build pipeline. A security check is configured in the deployment pipeline to identify major security issues before production deployment. Which other check should be executed before deployment to production?",
+      "options": {
+        "A": "An OSGi configuration validity check for the new release",
+        "B": "A performance check for the actual release functionality",
+        "C": "A dispatcher invalidation rule check for replication functionality",
+        "D": "A sling models validation check for the new release"
+      },
+      "correct_answer": "B",
+      "explanation": "Performance testing validates actual runtime behavior, catches performance regressions, identifies resource issues, and tests real-world scenarios. This is essential before production deployment as it ensures the system can handle expected load and performance requirements.",
+      "study_notes": "Pipeline best practice: Performance testing before production"
+    },
+    {
+      "id": "Q20",
+      "topic": "Configuration",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "According to Adobe best practices, how should a DevOps Engineer tailor OSGi service configurations depending on the type of environment?",
+      "options": {
+        "A": "Leverage multiple content packages for each environment",
+        "B": "Leverage configuration files in runmode dedicated folder",
+        "C": "Provide default configuration in the content package, and apply the differences using the OSGi console",
+        "D": "Use environment variables to identify the instance and environment type, then load the appropriate configuration files accordingly"
+      },
+      "correct_answer": "B",
+      "explanation": "Runmode folders provide environment-specific configurations with clear separation, use the standard AEM mechanism, and enable automated deployment. This is the recommended approach for managing different configurations across environments.",
+      "study_notes": "Best practice: Use runmode folders for environment-specific OSGi configs"
+    },
+    {
+      "id": "Q21",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A production AEM instance shuts down randomly. Which JVM parameter should the DevOps engineer implement to make sure the correct debugging info is collected?",
+      "options": {
+        "A": "Use -agentlibjdwp JVM parameter",
+        "B": "Use -XX:MaxMetaspaceSize JVM parameter",
+        "C": "Use -XX:+HeapDumpOnOutOfMemoryError JVM parameter",
+        "D": "Use -XX:+PrintGCDetails JVM parameter"
+      },
+      "correct_answer": "C",
+      "explanation": "The -XX:+HeapDumpOnOutOfMemoryError parameter creates a heap dump when OutOfMemoryError occurs, captures memory state when crash occurs, helps diagnose random shutdowns, and preserves debugging information for post-mortem analysis.",
+      "study_notes": "JVM debugging: -XX:+HeapDumpOnOutOfMemoryError for crash analysis"
+    },
+    {
+      "id": "Q22",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A DevOps engineer needs to analyze response performance from AEM. Log files can be extracted from the AEM environment. Which logfile should be analyzed?",
+      "options": {
+        "A": "request.log",
+        "B": "access.log",
+        "C": "response.log",
+        "D": "replication.log"
+      },
+      "correct_answer": "A",
+      "explanation": "The request.log captures details of each request made to AEM, records response times to help diagnose slow responses, and provides insight into processing delays, request load, and bottlenecks. This makes it the most relevant log file for analyzing response performance.",
+      "study_notes": "Performance analysis: request.log for response time analysis"
+    },
+    {
+      "id": "Q23",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Which HTTP header should be used to flush a particular resource such as JSON data without invalidating the other parts of cache?",
+      "options": {
+        "A": "CQ-Handle: ResourceOnly",
+        "B": "CQ-Action: Resource",
+        "C": "CQ-Action-Scope: ResourceOnly",
+        "D": "CQ-Action-Scope: Resource"
+      },
+      "correct_answer": "C",
+      "explanation": "The CQ-Action-Scope: ResourceOnly header replicates only the specific resource without including children or subnodes. This provides more targeted replication and is commonly used for single page or asset activation without affecting other cached content.",
+      "study_notes": "Dispatcher header: CQ-Action-Scope: ResourceOnly for targeted cache invalidation"
+    },
+    {
+      "id": "Q24",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps Engineer has cloned an environment, and configurations must be adjusted for the environment to function correctly. Due to the cloning, the domain and IPs changed during the process. Specifically for content activation, which two parts of the configurations must be altered? (Choose two.)",
+      "options": {
+        "A": "The transport URI of the dispatcher configuration",
+        "B": "The transport URI of the replication agents",
+        "C": "The user of the flush agents",
+        "D": "The user of the static content agent"
+      },
+      "correct_answer": "The transport URI of the flush agents",
+      "explanation": "B and E",
+      "study_notes": "After cloning, the replication agent URI must be updated to point to the new publish server, and the flush agent URI must be updated to point to the new dispatcher server. These are essential for content activation to work properly in the cloned environment."
+    },
+    {
+      "id": "Q25",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "Recently published content is not visible on the search results on the public website. All results show on the author environment, some results show on the publish environment, the LastindexedTime metric is not updated when checking the Async Indexer stats MBean, and the user is trying to find the page by the title. How can the DevOps Engineer gather more information about the root cause of this issue?",
+      "options": {
+        "A": "Increase the logging level for stderr.log to DEBUG by setting a JVM option",
+        "B": "Increase the logging level for stdout.log to DEBUG in the sling log support configuration",
+        "C": "Increase the logging level for the health reports in the maintenance UI",
+        "D": "Increase the logging level for org.apache.jackrabbit.oak.plugins.index"
+      },
+      "correct_answer": "D",
+      "explanation": "Since the issue is specifically related to indexing (LastindexedTime not updated, reindexing messages in logs), increasing the logging level for org.apache.jackrabbit.oak.plugins.index will provide detailed information about Oak index operations, helping to identify why the indexing process is not working correctly.",
+      "study_notes": "Indexing troubleshooting: Enable Oak index logging for detailed diagnostics"
+    },
+    {
+      "id": "Q26",
+      "topic": "Maintenance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Which type of backup should be performed to reduce the risk of a corrupted index?",
+      "options": {
+        "A": "Online backup when indexing is disabled",
+        "B": "Tape backup when the repository is in read-only mode",
+        "C": "Offline backup when AEM is not running",
+        "D": "Snapshot backup when the repository is paused"
+      },
+      "correct_answer": "A",
+      "explanation": "Online backup with indexing disabled provides a balance between consistency and availability. By disabling indexing during the backup, you prevent index corruption while still allowing the system to remain operational for users, making it the most practical approach for reducing index corruption risk.",
+      "study_notes": "Backup strategy: Disable indexing during online backup to prevent corruption"
+    },
+    {
+      "id": "Q27",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "In what two ways can a DevOps Engineer install a content package?",
+      "options": {
+        "A": "Store the content package in the crx-quickstart/install folder in the filesystem",
+        "B": "Use CRX Package Manager",
+        "C": "Upload the package through the OSGi console",
+        "D": "Upload the package to /content/dam and start the InstallPackageWorkflow"
+      },
+      "correct_answer": "Store the content package in the crx-quickstart/app folder in the filesystem",
+      "explanation": "A and B",
+      "study_notes": "The two valid methods are: 1) Hot folder deployment by placing packages in crx-quickstart/install (automated), and 2) Manual installation through CRX Package Manager UI. The other options are not valid installation methods."
+    },
+    {
+      "id": "Q28",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "New content is not visible on the website when accessing it via the dispatcher. Replication from author to publish works fine, dispatcher flush agent is present under /etc/replication/agents.author on the Publish instance and enabled, the checkbox for Dispatcher flush agent configuration is ticked for enabled when reviewed on the author instance, and rules in the dispatcher configuration are correct. Which problem with the dispatcher flush agent is causing this issue?",
+      "options": {
+        "A": "It is not configured properly in the dispatcher configuration",
+        "B": "It does not have enough permissions to receive the activation",
+        "C": "It is configured properly but located in the wrong path",
+        "D": "It is configured properly but uses the incorrect transport user"
+      },
+      "correct_answer": "C",
+      "explanation": "The flush agent is located at /etc/replication/agents.author but should be at /etc/replication/agents.author/publish.html. The missing /publish.html suffix prevents the flush agent from functioning properly, resulting in cached content not being invalidated even though replication works correctly.",
+      "study_notes": "Dispatcher flush agent: Must be at /etc/replication/agents.author/publish.html"
+    },
+    {
+      "id": "Q29",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A business needs to remove a publish instance due to a contractual downsizing. Which action will prevent a rapid increase of errors in the author instance?",
+      "options": {
+        "A": "Configure the dispatcher mapped to the publish instance being removed to display a maintenance page",
+        "B": "Delete the replication agent on the author instance mapped to the publish instance being removed",
+        "C": "Remove the dispatchers associated with the publish instance being removed",
+        "D": "Arrange a content freeze preventing access to the author instance while the publish instance is being removed"
+      },
+      "correct_answer": "B",
+      "explanation": "Deleting the replication agent prevents failed replication attempts that would otherwise cause error logs to rapidly accumulate in the author instance. Without removing the agent, the author would continually try to replicate to a publish instance that no longer exists.",
+      "study_notes": "Instance removal: Delete replication agent to prevent error accumulation"
+    },
+    {
+      "id": "Q30",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A user is able to access the OSGi console from the outside on a publish instance. Which deny filter rule configured in the dispatcher would properly prevent access to the OSGi console?",
+      "options": {
+        "A": "/system/*",
+        "B": "/system/felix",
+        "C": "/felix/console/*",
+        "D": "/console/felix"
+      },
+      "correct_answer": "A",
+      "explanation": "The /system/* pattern blocks all system paths including the OSGi console, providing the broadest protection. This is the most restrictive and secure approach, blocking access to all system-level functionality including the Felix console.",
+      "study_notes": "Security: /system/* blocks OSGi console access"
+    },
+    {
+      "id": "Q31",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps Engineer finds that customers are experiencing long response times. It is unclear which responses are slow, the cache hit ratio is low, and many requests are served from the publish instance. What should the DevOps Engineer use to analyze the issue?",
+      "options": {
+        "A": "riog.jar to analyze request.log",
+        "B": "rlog.jar to analyze dispatcher.log",
+        "C": "jail.jar to analyze audit.log",
+        "D": "jail.jar to analyze access.log"
+      },
+      "correct_answer": "A",
+      "explanation": "riog.jar analyzes request.log files and provides request timing analysis, response time patterns, performance bottlenecks, and cache effectiveness data. This is the most appropriate tool for analyzing long response times and identifying which specific requests are causing slowdowns.",
+      "study_notes": "Performance analysis: riog.jar for request.log analysis"
+    },
+    {
+      "id": "Q32",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps Engineer must configure a production deployment pipeline. The AEM environment consists of one author instance, two publish instances, and two dispatcher instances. A load balancer and CDN are also leveraged. In combination with load balancing, which step is required to make sure that the site is available during deployment?",
+      "options": {
+        "A": "Point the CDN to the author instance during the publish instance deployment",
+        "B": "Perform the deployment on one publish instance at a time",
+        "C": "Disable the replication agents during the deployment",
+        "D": "Clear the CDN cache after the author instance deployment"
+      },
+      "correct_answer": "B",
+      "explanation": "Rolling deployment (deploying one publish instance at a time) maintains service availability while load balancer handles traffic distribution. This ensures the site remains available during deployment as traffic routes to the available publish instance while the other is being updated.",
+      "study_notes": "Deployment strategy: Rolling deployment maintains availability"
+    },
+    {
+      "id": "Q33",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "When configuring replication agents, under which path of the repository are agents stored for the AEM author instance?",
+      "options": {
+        "A": "/etc/agents/replication/author",
+        "B": "/etc/agents/replication.author",
+        "C": "/etc/author/agents/replication",
+        "D": "/etc/replication/agents.author"
+      },
+      "correct_answer": "D",
+      "explanation": "The /etc/replication/agents.author path is the standard location for author replication agents and follows AEM naming conventions. The other options use incorrect path structures or component ordering.",
+      "study_notes": "Replication agents: /etc/replication/agents.author is the correct path"
+    },
+    {
+      "id": "Q34",
+      "topic": "Maintenance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "What are the two benefits of running the version purge maintenance task? (Choose two.)",
+      "options": {
+        "A": "Increases the system performance",
+        "B": "Cleans up versions that can not be restored",
+        "C": "Compacts disk space for unreferenced versions",
+        "D": "Reclaims disk space"
+      },
+      "correct_answer": "A and D",
+      "explanation": "Version purge increases system performance by reducing database size and query load, and reclaims disk space by removing old versions. These are the two primary benefits of running version purge maintenance tasks.",
+      "study_notes": "Version purge: Improves performance and reclaims disk space"
+    },
+    {
+      "id": "Q35",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "On which instance should a flush agent be configured to prevent invalidation timing issues after invalidation?",
+      "options": {
+        "A": "Publish",
+        "B": "Author",
+        "C": "Load-balancer",
+        "D": "Dispatcher"
+      },
+      "correct_answer": "B",
+      "explanation": "Flush agents should be configured on the Author instance. The correct path is /etc/replication/agents.publish/flush. This ensures proper cache invalidation timing and prevents issues with content updates not being reflected on the dispatcher.",
+      "study_notes": "Flush agent: Configure on Author instance at /etc/replication/agents.publish/flush"
+    },
+    {
+      "id": "Q36",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to add multiple custom domains to identify the environments and sites with unique branded names in a self-service manner via the Cloud Manager UI. What should the DevOps engineer do?",
+      "options": {
+        "A": "Remove the default domain name after attaching domains to the Publish Service",
+        "B": "Assign a wildcard domain name to the Publish Service",
+        "C": "Add a domain for each of the sites on the Publish Service",
+        "D": "Attach domains to the Sites service on the Production authoring instance"
+      },
+      "correct_answer": "C",
+      "explanation": "Adding a domain for each site on the Publish Service provides precise branding control, clear environment identification, and manageable configuration through Cloud Manager UI. This supports multiple sites with unique branded names as required.",
+      "study_notes": "Cloud Service domains: Add individual domains per site for precise control"
+    },
+    {
+      "id": "Q37",
+      "topic": "CRX/Oak",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Why does the size of the repository double when running online compaction?",
+      "options": {
+        "A": "A temporary working generation is stored on disk but removed afterwards",
+        "B": "A cache is created to improve performance of compaction",
+        "C": "A backup generation is stored on disk after online compaction",
+        "D": "The first generation is only cleaned after running a second online compaction"
+      },
+      "correct_answer": "A",
+      "explanation": "Online compaction requires double space because a temporary working copy is created during compaction while the original repository data remains active. The working copy is deleted once compaction completes, returning space to normal.",
+      "study_notes": "Online compaction: Requires temporary working space (double repository size)"
+    },
+    {
+      "id": "Q38",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to add multiple custom domains to identify the environments and sites with unique branded names in a self-service manner via the Cloud Manager UI. What should the DevOps engineer do?",
+      "options": {
+        "A": "Remove the default domain name after attaching domains to the Publish Service",
+        "B": "Assign a wildcard domain name to the Publish Service",
+        "C": "Add a domain for each of the sites on the Publish Service",
+        "D": "Attach domains to the Sites service on the Production authoring instance"
+      },
+      "correct_answer": "C",
+      "explanation": "Adding a domain for each site on the Publish Service provides precise branding control, clear environment identification, and manageable configuration through Cloud Manager UI. This supports multiple sites with unique branded names as required.",
+      "study_notes": "Cloud Service domains: Add individual domains per site for precise control"
+    },
+    {
+      "id": "Q39",
+      "topic": "CRX/Oak",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Why does the size of the repository double when running online compaction?",
+      "options": {
+        "A": "A temporary working generation is stored on disk but removed afterwards",
+        "B": "A cache is created to improve performance of compaction",
+        "C": "A backup generation is stored on disk after online compaction",
+        "D": "The first generation is only cleaned after running a second online compaction"
+      },
+      "correct_answer": "A",
+      "explanation": "Online compaction requires double space because a temporary working copy is created during compaction while the original repository data remains active. The working copy is deleted once compaction completes, returning space to normal.",
+      "study_notes": "Online compaction: Requires temporary working space (double repository size)"
+    },
+    {
+      "id": "Q40",
+      "topic": "Configuration",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "According to Adobe best practices, how should a DevOps Engineer tailor OSGi service configurations depending on the type of environment?",
+      "options": {
+        "A": "Leverage multiple content packages for each environment",
+        "B": "Leverage configuration files in runmode dedicated folder",
+        "C": "Provide default configuration in the content package, and apply the differences using the OSGi console",
+        "D": "Use environment variables to identify the instance and environment type, then load the appropriate configuration files accordingly"
+      },
+      "correct_answer": "B",
+      "explanation": "Runmode folders provide environment-specific configurations with clear separation, use the standard AEM mechanism, and enable automated deployment. This is the recommended approach for managing different configurations across environments.",
+      "study_notes": "Best practice: Use runmode folders for environment-specific OSGi configs"
+    },
+    {
+      "id": "Q41",
+      "topic": "OSGi",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "The DevOps Engineer sees many occurrences of org.apache.sling.api.resource.LoginException in the logs. Apache Sling Service User Mapper Service is configured with a default user. Service user mapping is configured for the OSGi bundle, causing the exception. What is the root cause of these exceptions?",
+      "options": {
+        "A": "Administrative resource resolvers have been disabled by configuration and the bundle deployed still relies on it",
+        "B": "The configured service user is not a system user or does not exist",
+        "C": "There is no service user mapping configured for the Java class causing the exception",
+        "D": "The exceptions relate to failed login attempts with incorrect credentials"
+      },
+      "correct_answer": "B",
+      "explanation": "The configured service user is not a system user or does not exist. This is the most common cause of LoginException when service user mapping is configured but the user doesn't exist or isn't properly configured as a system user.",
+      "study_notes": "OSGi troubleshooting: Service user must exist and be configured as system user"
+    },
+    {
+      "id": "Q42",
+      "topic": "OSGi",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps Engineer receives notifications from the monitoring system about a bundle being stuck in \"installed\" state. A new version of an OSGi bundle was recently deployed. All author and publish instances are affected. Manually starting the bundle does not solve the issue. What prevents the OSGi bundle from being activated?",
+      "options": {
+        "A": "At least one OSGi bundle marked as a dependency is not available in the instances",
+        "B": "At least one OSGi component throws an exception during activation",
+        "C": "At least one OSGi component has ConfigurationPolicy set to \"required\" and no configuration is provided",
+        "D": "At least one OSGi component reference is unsatisfied"
+      },
+      "correct_answer": "A",
+      "explanation": "Bundle in \"installed\" state specifically indicates dependency resolution failure. The bundle can't move to \"resolved\" state because at least one dependency is missing, preventing it from transitioning to \"active\" state.",
+      "study_notes": "OSGi bundle states: Installed state indicates missing dependencies"
+    },
+    {
+      "id": "Q43",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A server has been provisioned with 32GB, 16 cores, and 1TB for use as an author instance to host AEM Assets. Which operation should the DevOps engineer perform before starting AEM?",
+      "options": {
+        "A": "Set COFILE_SIZE_LIMIT to 1TB",
+        "B": "Set CQJVM_OPTS -Xmx to 32gb",
+        "C": "Set CQJVM_OPTS -Xmx to 16gb",
+        "D": "Set CQJVM_OPTS -XX:MaxPermSize to 16gb"
+      },
+      "correct_answer": "C",
+      "explanation": "For a 32GB server, setting CQJVM_OPTS -Xmx to 16gb follows the best practice of allocating about 50% of available RAM to the JVM heap. This leaves adequate memory for the OS and other processes while providing sufficient heap for AEM Assets workload.",
+      "study_notes": "JVM sizing: Use 50% of available RAM for heap (-Xmx16g for 32GB server)"
+    },
+    {
+      "id": "Q44",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A form POST functions correctly on publish and dispatch servers but does not function on an author server. The form is a standard form POST with no JavaScript dependency. The developer confirms the same behavior using the \"?wcmmode=disabled\" parameter as well as using browser incognito mode. Which two items should the DevOps engineer research? (Choose two.)",
+      "options": {
+        "A": "Adobe Granite CSRF Filter",
+        "B": "Adobe WCM Debug Filter",
+        "C": "Adobe HTML Library Manager",
+        "D": "Apache Sling Referrer Filter"
+      },
+      "correct_answer": "Adobe Sling Request Parameter Handling",
+      "explanation": "A and D",
+      "study_notes": "Adobe Granite CSRF Filter and Apache Sling Referrer Filter are the two most relevant security filters that could block form POSTs on author instances. CSRF Filter requires tokens for POST requests, and Referrer Filter checks request origins, both being more restrictive on author instances."
+    },
+    {
+      "id": "Q45",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "Which transport URI should be used to configure a Flush Agent for a dispatcher listening on localhost port 8000?",
+      "options": {
+        "A": "http://localhost:8000/dispatcher/invalidate.cache",
+        "B": "http://localhost:8000/dispatcher/cache.invalidate",
+        "C": "http://localhost:8000/bin/receive",
+        "D": "http://localhost:8000/invalidate.cache"
+      },
+      "correct_answer": "A",
+      "explanation": "The correct transport URI for a flush agent is http://localhost:8000/dispatcher/invalidate.cache. This is the standard endpoint that dispatcher uses to receive cache invalidation requests from AEM.",
+      "study_notes": "Dispatcher flush agent: Use /dispatcher/invalidate.cache endpoint"
+    },
+    {
+      "id": "Q46",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "What supported web server should a DevOps Engineer use when setting up the dispatcher version 4.3.1 in a Unix environment?",
+      "options": {
+        "A": "IIS 7.5",
+        "B": "Apache 2.4",
+        "C": "Apache 2.0",
+        "D": "Nginx 1.14"
+      },
+      "correct_answer": "B",
+      "explanation": "Apache 2.4 is officially supported for Dispatcher 4.3.1 in Unix environments. IIS is Windows-only, Apache 2.0 is too old, and Nginx is not officially supported for this dispatcher version.",
+      "study_notes": "Dispatcher setup: Apache 2.4 is supported for Dispatcher 4.3.1 on Unix"
+    },
+    {
+      "id": "Q47",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A company asks a DevOps engineer to set up a local AEM using the AEM as a Cloud Service SDK's Quickstart Jar. The DevOps engineer needs to test and simulate content distribution between the local Author and Publish services. Which two actions should the DevOps engineer take? (Choose two.)",
+      "options": {
+        "A": "Configure the Sling Content Distribution via the OSGi Console",
+        "B": "Enable the legacy Replication agents",
+        "C": "Install the Adobe Pipeline micro service package",
+        "D": "Make sure the environments are running on their default ports"
+      },
+      "correct_answer": "B and D",
+      "explanation": "Enable the legacy Replication agents and make sure the environments are running on their default ports. The documentation states that legacy replication agents can be enabled to simulate content distribution between local Author and Publish services during development.",
+      "study_notes": "Cloud Service SDK: Enable legacy replication agents for local content distribution simulation"
+    },
+    {
+      "id": "Q48",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "How can the DevOps Engineer prevent any user from logging in with the default admin credentials during startup of the AEM instance?",
+      "options": {
+        "A": "Change the default AEM admin password on initial setup",
+        "B": "Disable the OSGi web console login bundle by using the production ready runmode",
+        "C": "Configure the dispatcher to prevent access to /system/console",
+        "D": "Update the default password in the OSGi configuration for the OSGi web console"
+      },
+      "correct_answer": "A",
+      "explanation": "Change the default AEM admin password on initial setup using system property -Dadmin.password.reset=true. This ensures no one can ever log in with the default admin/admin credentials by changing the password before the system becomes accessible.",
+      "study_notes": "Security: Change default admin password during initial setup"
+    },
+    {
+      "id": "Q49",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A company is launching a new multinational AEM site. The new site will have a large pool of authors all over the world. The company needs to be sure it can handle the load. The load requirements for the new site are: A daily load scaling from 100 to 1000 authors, Create multiple pages and live copies (including MSM rollouts), Upload multiple images into Assets, Assign 1000 tags to each new pages. What can the DevOps Engineer do to make sure the AEM instance can handle the load?",
+      "options": {
+        "A": "Use standard Cloud Manager tests",
+        "B": "Use Adobe Tough Day 2",
+        "C": "Set up a cold standby instance",
+        "D": "Set up auto scaling"
+      },
+      "correct_answer": "B",
+      "explanation": "Use Adobe Tough Day 2 to stress test the author environment under heavy load. Tough Day 2 can simulate multiple authors, test MSM operations, asset uploads, and tagging operations concurrently, which matches the requirements for testing heavy author load scenarios.",
+      "study_notes": "Performance testing: Use Tough Day 2 for heavy author load testing"
+    },
+    {
+      "id": "Q50",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "An end user reports performance issues on the site. The AEM environment uses a CDN and a dispatcher as caching layers. The number of requests on the publish instance has increased significantly. Which metric can be monitored to see trends related to the problem early enough to be able to react?",
+      "options": {
+        "A": "\"Current cache hit ratio\" in the dispatcher.log",
+        "B": "Offload metric in the CDN",
+        "C": "\"Recent requests\" in AEM",
+        "D": "Output from the request.log measuring response time"
+      },
+      "correct_answer": "A",
+      "explanation": "The cache hit ratio in dispatcher.log is the best early warning indicator. A decreasing cache hit ratio shows that more requests are bypassing the cache and hitting the publish instance, which precedes performance issues and provides early warning before users experience significant problems.",
+      "study_notes": "Performance monitoring: Cache hit ratio as early warning indicator"
+    },
+    {
+      "id": "Q51",
+      "topic": "Development",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "The development team asks the DevOps engineer for help to set up Java remote debugging on a local AEM instance to debug an AEM application. The DevOps engineer needs to activate remote debugging on port 8000. Which JVM parameter should the DevOps engineer add to perform this task?",
+      "options": {
+        "A": "-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n",
+        "B": "-Djava.awt.headless=TRUE -javaagent:local.jar=8000",
+        "C": "-Dcom.sun.management.jmxremote.port=8000 -Djava.rmi.server.hostname=localhost",
+        "D": "-Ddebug.port=8000"
+      },
+      "correct_answer": "A",
+      "explanation": "The -agentlib:jdwp parameter enables Java Debug Wire Protocol for remote debugging. The correct syntax is -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n which allows developers to connect their IDE debuggers to step through running code.",
+      "study_notes": "Development: Use -agentlib:jdwp for remote debugging setup"
+    },
+    {
+      "id": "Q52",
+      "topic": "Configuration",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "An AEM instance is restarted with the command: java -Dsling.run.modes=author -jar cq-publish.jar -r author. The sling.properties includes the line sling.run.modes=publish. In which runmode is AEM started?",
+      "options": {
+        "A": "Author runmode because the system property sling.run.modes has the highest priority",
+        "B": "Publish runmode because the sling.properties file has the highest priority",
+        "C": "Author runmode because the -r parameter has the highest priority",
+        "D": "Publish runmode because it is determined from the quickstart jar filename"
+      },
+      "correct_answer": "A",
+      "explanation": "System properties (-D) have the highest priority in AEM runmode resolution. The -Dsling.run.modes=author parameter overrides the sling.properties setting, so AEM starts in author mode despite the jar filename and properties file configuration.",
+      "study_notes": "Runmode priority: System properties override sling.properties and jar filename"
+    },
+    {
+      "id": "Q53",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "The DevOps Engineer should copy users and groups from an existing environment to another one, except for the \"admin\" user. What first action should be taken to build the users package?",
+      "options": {
+        "A": "Add an exclude pattern from \"/home/users/admin\"",
+        "B": "Run the query \"/jcr:root/home/users//element(*,rep:User)[@rep:userName=\"admin\"]\"",
+        "C": "Run the query \"/jcr:root/home/users//element(*,rep:User)[@rep:principalName=\"admin\"]\"",
+        "D": "Add a filter for \"/home/users/admin\""
+      },
+      "correct_answer": "C",
+      "explanation": "Run the query \"/jcr:root/home/users//element(*,rep:User)[@rep:principalName=\"admin\"]\" to identify the admin user first. This query uses the correct JCR path and property (@rep:principalName) to find the admin user, which is necessary before configuring package exclusion rules.",
+      "study_notes": "User migration: Query to identify admin user before package creation"
+    },
+    {
+      "id": "Q54",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A company needs to support 1500 unique users per day and 300 concurrent users for their author instance. Which persistence storage option should the DevOps Engineer select?",
+      "options": {
+        "A": "RDBMS",
+        "B": "TarMK",
+        "C": "MongoMK",
+        "D": "S3"
+      },
+      "correct_answer": "B",
+      "explanation": "TarMK is the correct choice for this author instance scenario. It can handle up to 1000 concurrent users and is Adobe's recommended persistence layer for single author instances. The specified load (300 concurrent) is well within TarMK's capabilities.",
+      "study_notes": "Persistence layer: TarMK for single author instances up to 1000 concurrent users"
+    },
+    {
+      "id": "Q55",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps Engineer is deploying an AEM environment in a private network. How can the DevOps Engineer restrict other clients or applications from flushing the cache?",
+      "options": {
+        "A": "Set permissions on the publish instance by using Access Control Lists to allow the publish instance private IPs",
+        "B": "Configure the /filter section of the dispatcher configuration with an allow rule to make sure the correct client's private IPs are allowed to flush the cache",
+        "C": "The allowedClients section in the dispatcher configuration should only allow the publish instances private IPs",
+        "D": "Set up client certificate authentication in the dispatcher configuration"
+      },
+      "correct_answer": "C",
+      "explanation": "The allowedClients section in dispatcher configuration restricts which IPs can send flush requests. This is specifically designed for this purpose and ensures only authorized publish instances can invalidate the dispatcher cache, providing simple and effective security.",
+      "study_notes": "Dispatcher security: Use /allowedClients to restrict cache flush access"
+    },
+    {
+      "id": "Q56",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "An AEM setup requires custom error pages to be delivered by the webserver. The DevOps Engineer must configure the dispatcher so that the webserver delivers such error pages and not AEM. The webserver is configured with an error document directive for the specific error codes. To what value should the dispatcher parameter be set?",
+      "options": {
+        "A": "DispatcherPassError 0",
+        "B": "DispatcherPassError 1",
+        "C": "DispatcherServeError 0",
+        "D": "DispatcherServeError 1"
+      },
+      "correct_answer": "B",
+      "explanation": "DispatcherPassError 1 passes error codes (≥400) to Apache, allowing Apache ErrorDocument directives to work. This enables custom error pages to be delivered by the webserver instead of AEM, which is the desired behavior for this configuration.",
+      "study_notes": "Dispatcher config: DispatcherPassError 1 enables webserver error pages"
+    },
+    {
+      "id": "Q57",
+      "topic": "Configuration",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Which configuration file is applied for the component \"org.apache.felix.webconsole.internal.servlet.OsgiManager\" on the publish instance, assuming all files below are deployed?",
+      "options": {
+        "A": "/apps/system/config/org.apache.felix.webconsole.internal.servlet.OsgiManager.config",
+        "B": "/system/config/org.apache.felix.webconsole.internal.servlet.OsgiManager.config",
+        "C": "/apps/<your.project>/config.author/org.apache.felix.webconsole.internal.servlet.OsgiManager.config",
+        "D": "/apps/<your.project>/config/org.apache.felix.webconsole.internal.servlet.OsgiManager.config"
+      },
+      "correct_answer": "A",
+      "explanation": "The /apps/system/config/ path is used for system-level OSGi configurations. This path ensures the configuration applies to the Felix Web Console component across all instances, including publish instances, following AEM's standard configuration hierarchy.",
+      "study_notes": "OSGi config: /apps/system/config/ for system-level component configurations"
+    },
+    {
+      "id": "Q58",
+      "topic": "Development",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A problem is found on an AEM instance. How can the DevOps Engineer enable the developers to step through the actual code that is running?",
+      "options": {
+        "A": "Start AEM with the debug runmode set",
+        "B": "Connect to the JVM using a JMX connection",
+        "C": "Start AEM with the remote debugging JVM parameter",
+        "D": "Create an SSH tunnel to access the AEM java port"
+      },
+      "correct_answer": "C",
+      "explanation": "Start AEM with the remote debugging JVM parameter (-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n) enables developers to connect their IDE debuggers to step through running code. This provides code-level debugging capabilities.",
+      "study_notes": "Development debugging: Use remote debugging JVM parameter for code stepping"
+    },
+    {
+      "id": "Q59",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "What is the role of the External Login Module when setting up LDAP Authentication with AEM?",
+      "options": {
+        "A": "It defines how the Identity Provider users and groups will be synchronized with the repository",
+        "B": "It invokes JMX syncing of users",
+        "C": "It defines which Identity Provider and Sync Handler to use",
+        "D": "It defines how users are retrieved from the LDAP server"
+      },
+      "correct_answer": "C",
+      "explanation": "The External Login Module acts as a connector that defines which Identity Provider and Sync Handler to use. It connects the components but doesn't handle synchronization or user retrieval directly - that's handled by the Sync Handler and LDAP Provider respectively.",
+      "study_notes": "LDAP setup: External Login Module defines Identity Provider and Sync Handler connections"
+    },
+    {
+      "id": "Q60",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A production AEM instance shuts down randomly. Which JVM parameter should the DevOps engineer implement to make sure the correct debugging info is collected?",
+      "options": {
+        "A": "Use -agentlibjdwp JVM parameter",
+        "B": "Use -XX:MaxMetaspaceSize JVM parameter",
+        "C": "Use -XX:+HeapDumpOnOutOfMemoryError JVM parameter",
+        "D": "Use -XX:+PrintGCDetails JVM parameter"
+      },
+      "correct_answer": "C",
+      "explanation": "The -XX:+HeapDumpOnOutOfMemoryError parameter creates a heap dump when OutOfMemoryError occurs, captures memory state when crash occurs, helps diagnose random shutdowns, and preserves debugging information for post-mortem analysis.",
+      "study_notes": "JVM debugging: -XX:+HeapDumpOnOutOfMemoryError for crash analysis"
+    },
+    {
+      "id": "Q61",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to deploy a filevault package that contains a mixture of mutable and immutable paths to AEM as a Cloud Service, via Package Manager. What should the DevOps engineer do?",
+      "options": {
+        "A": "Refactor the content package, set the packageType to \"content\", and make sure it contains all subpackages and OSGi configurations",
+        "B": "Refactor the content package, set the packageType to \"content\", and set the inclusion filters to only /content or /conf",
+        "C": "Refactor the content package, set the packageType to \"mixed\", and leave the filter.xml unchanged",
+        "D": "Refactor the content package, set the packageType to \"mixed\", and make sure it contains all subpackages and OSGi configurations"
+      },
+      "correct_answer": "B",
+      "explanation": "Refactor the content package, set the packageType to \"content\", and set the inclusion filters to only /content or /conf. This follows best practices by using the correct package type with proper content filtering, maintaining clean separation of concerns and structure.",
+      "study_notes": "Cloud Service packages: Use content type with proper /content or /conf filtering"
+    },
+    {
+      "id": "Q62",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A DevOps engineer needs to configure SAML on an AEM author instance. Which items does the DevOps engineer need from the Identity Provider (IdP)?",
+      "options": {
+        "A": "IdP PrivateKey, ServiceEntity ID, IdP URL",
+        "B": "SSL certificate, ServiceEntity ID, IdP URL",
+        "C": "IdP certificate, ServiceEntity ID, IdP URL",
+        "D": "IdP certificate, ServiceEntity ID, IdP URL, Private Key"
+      },
+      "correct_answer": "C",
+      "explanation": "IdP certificate, ServiceEntity ID, and IdP URL are the three required components for SAML authentication setup. The IdP certificate is used for SAML validation, ServiceEntity ID identifies the service, and IdP URL provides the endpoint for authentication.",
+      "study_notes": "SAML setup: Need IdP certificate, ServiceEntity ID, and IdP URL"
+    },
+    {
+      "id": "Q63",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "During security tests, it becomes apparent that AEM-specific paths were accessible on the publish instance. These paths should not be accessible to the public. Which configuration should be used on a publish dispatcher instance?",
+      "options": {
+        "A": "/0001 {/type \"deny\" /glob \"*\"}",
+        "B": "/0001 {/type \"deny\" /url \"/crx/*\"}",
+        "C": "/0001 {/type \"deny\" /url \"/system/*\"}",
+        "D": "/0001 {/type \"deny\" /glob \"/system/*\"}"
+      },
+      "correct_answer": "C",
+      "explanation": "/0001 {/type \"deny\" /url \"/system/*\"} blocks system paths using the correct /url syntax (not deprecated /glob). This prevents access to AEM-specific system paths while following current best practices for dispatcher security configuration.",
+      "study_notes": "Dispatcher security: Use /url syntax to deny /system/* paths"
+    },
+    {
+      "id": "Q64",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer must authenticate an access token to create an API integration for Cloud Manager. Which token should the DevOps engineer use?",
+      "options": {
+        "A": "OAuth2 Token",
+        "B": "Web API Token",
+        "C": "JSON Web Token",
+        "D": "Oak Login Token"
+      },
+      "correct_answer": "C",
+      "explanation": "JSON Web Token (JWT) is required for Cloud Manager API integration. Cloud Manager specifically requires JWT for API authentication to access Adobe I/O APIs, which is the standard format for Adobe services and required for integration service account authentication.",
+      "study_notes": "Cloud Manager API: Use JSON Web Token (JWT) for authentication"
+    },
+    {
+      "id": "Q65",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "A DevOps engineer is migrating custom index definitions in preparation to move an on-premise instance to the AEM as a Cloud Service. The on-premise AEM instance contains indexes in the following locations: under /apps/my-app/oak-index, under /content/my-site/oak-index, under /oak:index. The indexes must be consolidated before using the Index Converter utility. Which two possible paths should the DevOps engineer consolidate the index to? (Choose two.)",
+      "options": {
+        "A": "/content/my-site/oak-index",
+        "B": "/apps/my-app/oak-index",
+        "C": "/oak:index",
+        "D": "/conf/my-site/settings/oak-index"
+      },
+      "correct_answer": "B and D",
+      "explanation": "Indexes should be consolidated to /apps/my-app/oak-index for application-specific indexes deployed as part of the codebase, and /conf/my-site/settings/oak-index for content-related indexes that need to be configurable. These locations are compatible with the Index Converter utility and follow AEM as a Cloud Service best practices.",
+      "study_notes": "Cloud Service migration: Consolidate indexes to /apps/ or /conf/ paths"
+    },
+    {
+      "id": "Q66",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A developer needs a custom URL when previewing a page on AEM as a Cloud Service that differs from publish. How should the DevOps engineer configure the OSGi setting?",
+      "options": {
+        "A": "/apps//config/publish{\"preview.url\": \"preview.site.com\"}",
+        "B": "/apps//config/preview{\"publish.url\": \"preview.site.com\"}",
+        "C": "/apps//config.preview{\"publish.url\": \"preview.site.com\"}",
+        "D": "/apps//config.publish{\"preview.url\": \"preview.site.com\"}"
+      },
+      "correct_answer": "C",
+      "explanation": "/apps//config.preview{\"publish.url\": \"preview.site.com\"} uses the correct OSGi runmode configuration format with dot notation (config.preview) and the correct property (publish.url) to define the URL used for previewing content in the preview environment.",
+      "study_notes": "Cloud Service OSGi: Use config.preview with publish.url property"
+    },
+    {
+      "id": "Q67",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to edit a Production program based on the entitled solutions in a self-service manner via the UI. Which two actions can the DevOps engineer take? (Choose 2)",
+      "options": {
+        "A": "Add Commerce solution to a program without Sites",
+        "B": "Add Forms solution to a program without Sites",
+        "C": "Add Screens solution to the Development environment only",
+        "D": "Remove Sites from an existing program that includes both Sites and Assets"
+      },
+      "correct_answer": "A and B",
+      "explanation": "Add Commerce solution to a program without Sites and Add Forms solution to a program without Sites are valid actions. Commerce and Forms can be added as standalone solutions without requiring Sites as a prerequisite, allowing for self-service configuration via the Cloud Manager UI.",
+      "study_notes": "Cloud Manager: Commerce and Forms can be added without Sites dependency"
+    },
+    {
+      "id": "Q68",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A multinational customer's \"warning threshold\" for the Folder Size: AEM Segment Store metric on the System Monitoring page in Cloud Manager is not the same as other customers and needs to be changed to match. What should the DevOps engineer do?",
+      "options": {
+        "A": "Define a new \"Folder Size\" KPI in the Setup Program panel",
+        "B": "Configure the Cloud Manager Integration in Adobe I/O console",
+        "C": "Deploy the new metric using the Developer Console",
+        "D": "Contact the Adobe Customer Success Engineer"
+      },
+      "correct_answer": "D",
+      "explanation": "Contact the Adobe Customer Success Engineer as warning thresholds for system monitoring metrics are typically managed by Adobe and require support intervention. These thresholds are not configurable through self-service UI and need Adobe's assistance to modify.",
+      "study_notes": "Cloud Manager monitoring: Contact Adobe support for threshold changes"
+    },
+    {
+      "id": "Q69",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A DevOps engineer needs to perform initial onboarding of users who need to have admin privileges to the AEM as a Cloud Service instances. What must the DevOps engineer do?",
+      "options": {
+        "A": "Add users to the AEM Administrators-xxx product profile via the Admin Console",
+        "B": "Add users to the Administrators group via the Oak LDAP synchronization",
+        "C": "Add users to the Administrators group on the AEM instances",
+        "D": "Add users to the Cloud Manager Administrators group"
+      },
+      "correct_answer": "A",
+      "explanation": "Add users to the AEM Administrators-xxx product profile via the Admin Console. For Cloud Service, user management is handled through IMS and the Admin Console is the only correct method for granting admin privileges, as local user management and LDAP synchronization are not supported.",
+      "study_notes": "Cloud Service admin: Use Admin Console product profiles for user management"
+    },
+    {
+      "id": "Q70",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to analyze an end user performance issue for an AEM as a Cloud Service Sites setup. Certain assets that are delivered with a no-cache header to the browser are being delivered very slowly. Network performance looks fine, and other assets that have a TTL defined in the caching header are delivered normally. Which log file should the DevOps engineer analyze further?",
+      "options": {
+        "A": "Dispatcher log",
+        "B": "HAR file",
+        "C": "AEM request log",
+        "D": "AEM error log"
+      },
+      "correct_answer": "C",
+      "explanation": "AEM request log should be analyzed because assets with no-cache headers must go to the publish instance every time (bypassing dispatcher cache), while cached assets work normally. The slow performance indicates a bottleneck on the publish instance, which the request log will show.",
+      "study_notes": "Performance analysis: AEM request log for uncached asset processing issues"
+    },
+    {
+      "id": "Q71",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A customer's Sandbox environment is hibernated, and the customer wants it to stay in that state until they are ready for testing. While hibernated, the customer wants custom code deployed, and they should have the new code once the environment is de-hibernated. What should the DevOps engineer do?",
+      "options": {
+        "A": "Use Developer Console to de-hibernate the environment and then deploy the code",
+        "B": "Create a hibernate branch in Git and perform an update from this branch",
+        "C": "Use a pipeline to deploy custom code to the hibernated environment",
+        "D": "Use Cloud Manager to de-hibernate the environment and then deploy the code"
+      },
+      "correct_answer": "C",
+      "explanation": "Use a pipeline to deploy custom code to the hibernated environment. Hibernated environments can still receive code deployments through pipelines, and the code will be ready when the environment is de-hibernated. This saves resources while preparing the environment for testing.",
+      "study_notes": "Cloud Service: Pipelines can deploy to hibernated environments"
+    },
+    {
+      "id": "Q72",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "The Package Manager fails to load. The error log shows the following lines: \"com.day.crx.packmgr.impl.servlets.ListServlet Error while retrieving infos: javax.jcr.RepositoryException: Invalid path: /etc/packages/my_packages/...\" What should the DevOps engineer do?",
+      "options": {
+        "A": "Remove any rule that is configured for the name \"packmgr\" under /etc/map",
+        "B": "Rename the package by editing the \"name\" property of the vault definition",
+        "C": "Add an allow filter to the dispatcher configuration for \"/etc/packages\"",
+        "D": "Restart the AEM instance"
+      },
+      "correct_answer": "A",
+      "explanation": "Remove any rule that is configured for the name \"packmgr\" under /etc/map. Sling mapping rules can cause path resolution issues, and removing the problematic mapping rule will restore proper path resolution for Package Manager to access /etc/packages/.",
+      "study_notes": "Package Manager troubleshooting: Remove problematic Sling mapping rules"
+    },
+    {
+      "id": "Q73",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "An enterprise customer of AEM as a Cloud Service has three independent development teams. Each team is responsible for publishing a different website with a unique domain and SSL certificate to the single, shared AEM program. Each team has set their own project timeline with a different launch date planned within the next 6 months. Each team has their own upstream Git repository hosted in the corporate subnet, which they initialized using the latest aem-project-archetype. The DevOps engineer is solely responsible for any configurations needed to enable automated deployment to all three environments (dev, stage, and prod). Which two options should the DevOps engineer choose? (Choose two.)",
+      "options": {
+        "A": "Use Git submodules in Cloud Manager to merge the content of multiple branches across git repositories at build time",
+        "B": "Three separate Cloud Service programs and Cloud Manager Developer/Deployment Manager role assignments for each of the three team leads",
+        "C": "A multi-module Maven project that embeds each team's Git repository as a module of the encompassing Maven project",
+        "D": "A fourth Git repository that contains a root pom file and a CI/CD pipeline script cloning the other three project repositories as subfolders"
+      },
+      "correct_answer": "C and D",
+      "explanation": "A multi-module Maven project that embeds each team's Git repository as a module of the encompassing Maven project, and A fourth Git repository that contains a root pom file and a CI/CD pipeline script cloning the other three project repositories as subfolders. Both solutions allow integration of multiple team repositories into a single build process while maintaining team independence within the single shared program constraint.",
+      "study_notes": "Multi-team deployment: Use Maven multi-module or aggregation repository approach"
+    },
+    {
+      "id": "Q74",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer is supporting a client on Adobe Managed Services. The setup will be migrated to AEM as a Cloud Service. Which two methods can be applied for scaling publish instances on the current platform? (Choose two.)",
+      "options": {
+        "A": "Manual scaling via CSE horizontally",
+        "B": "Auto scaling via Cloud Manager horizontally",
+        "C": "Auto scaling via Cloud Manager vertically",
+        "D": "Manual scaling via the Adobe I/O CLI vertically"
+      },
+      "correct_answer": "Manual scaling via Cloud Manager horizontally",
+      "explanation": "B and E",
+      "study_notes": "Auto scaling via Cloud Manager horizontally and Manual scaling via Cloud Manager horizontally. AMS supports both auto-scaling and manual scaling through Cloud Manager, and both use horizontal scaling. CSEs no longer manage instance scaling directly, and vertical scaling is not typically used for publish instances."
+    },
+    {
+      "id": "Q75",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer is migrating an AEM 6.2 instance with a large content repository to AEM as a Cloud Service. The DevOps engineer must prepare the instance to move existing content via the Content Transfer Tool. Which two actions is the DevOps engineer required to perform? (Choose two.)",
+      "options": {
+        "A": "Refactor the application code",
+        "B": "Upgrade the instance to AEM 6.5",
+        "C": "Review total index size",
+        "D": "Install the latest AEM Service Packs"
+      },
+      "correct_answer": "B and C",
+      "explanation": "Upgrade the instance to AEM 6.5 and Review total index size. The Content Transfer Tool requires a minimum of AEM 6.5, so upgrading from 6.2 is mandatory. Reviewing the total index size is also required because Cloud Service uses a different indexing approach, and index size affects migration planning.",
+      "study_notes": "Cloud Service migration: AEM 6.5 minimum and index size review for CTT"
+    },
+    {
+      "id": "Q76",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "The most recent Non-Production pipeline failed for an AEM as a Cloud Service program. The DevOps engineer is investigating and observes the following: The pipeline failed during the Functional Testing phase. The pipeline step log indicates a timeout error when replicating paths under a \"/content/test-site\" root. The dev environment error logs and the Distribution page on Author indicate that the distribution queues are blocked on a content package. What is causing the issue?",
+      "options": {
+        "A": "The sling-distribution user has insufficient permissions in the dev environment",
+        "B": "The sling-distribution user has insufficient permissions in the Author Service",
+        "C": "The sling-distribution-importer user has insufficient permissions in the Publish Service",
+        "D": "The sling-distribution-importer user has insufficient permissions in the Author Service"
+      },
+      "correct_answer": "C",
+      "explanation": "The sling-distribution-importer user has insufficient permissions in the Publish Service. Distribution queue blockage suggests a publish-side issue where content can't be imported. The sling-distribution-importer needs correct permissions on the receive side (publish) to process queued content packages.",
+      "study_notes": "Cloud Service distribution: sling-distribution-importer permissions on publish service"
+    },
+    {
+      "id": "Q77",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "A DevOps engineer notices a high load on the Publish instances. URLs similar to the following hit the publish servers directly and are not cached on dispatcher: GET /content/siteA/page1.html?user=test1, GET /content/siteA/page1.html?user=test2, GET /content/siteA/page1.html?user1=test3, GET /content/siteA/page1.html?user2=test4. How should a DevOps engineer configure the dispatcher?",
+      "options": {
+        "A": "/ignoreUrlParams{/0001 { /glob \"*\"/type \"allow\" }/0002 { /glob \"test*\" /type \"deny\" }}",
+        "B": "/ignoreUrlParams{/0001 {/glob \"*\"/type \"deny\"} /0002 {/glob \"test*\" type \"allow\" }}",
+        "C": "/ignoreUrlParams {/0001 { /glob \"*\"/type \"allow\" }/0002 { /glob \"user*\" /type \"deny\" }}",
+        "D": "/ignoreUrlParams{/0001 { /glob \"*\"/type \"deny\" }/0002 { /glob \"user*\" /type \"allow\" }}"
+      },
+      "correct_answer": "C",
+      "explanation": "/ignoreUrlParams {/0001 { /glob \"*\"/type \"allow\" }/0002 { /glob \"user*\" /type \"deny\" }}. This configuration ignores all parameters by default (allow) but doesn't ignore user parameters (deny), ensuring URLs with different user parameters use the same cached response, reducing publish load.",
+      "study_notes": "Dispatcher caching: Use /ignoreUrlParams to cache URLs with user parameters"
+    },
+    {
+      "id": "Q78",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A developer needs to preview a new page before releasing publicly. The DevOps engineer confirms that AEM as a Cloud Service is the latest version and that the correct IP has been added to a new Allow List for the Preview Service. The developer is still not able to access the page. What should the DevOps engineer do?",
+      "options": {
+        "A": "Unapply the default IP Allow List from the Preview Service",
+        "B": "Reapply the default IP Allow List from the Preview Service",
+        "C": "Create an IP Allow List and apply to Publish Service",
+        "D": "Unapply the default IP Allow List from the Publish Service"
+      },
+      "correct_answer": "A",
+      "explanation": "Unapply the default IP Allow List from the Preview Service. When a new allow list is added to Preview Service, the default list must be removed because default and custom lists don't merge. The default list blocks all IPs except Adobe's defaults, so removing it allows the custom IP list to take effect.",
+      "study_notes": "Cloud Service preview: Remove default IP allow list when adding custom list"
+    },
+    {
+      "id": "Q79",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to deploy a branch to the Stage Environment, so UAT testing can begin. The engineer starts a Production Pipeline with a manual trigger. The Code Scanning results return the following summary: Security Rating: C, Reliability Rating: B, Maintainability Rating: A, Code Coverage: 10%. Which two actions should the DevOps engineer take? (Choose two.)",
+      "options": {
+        "A": "Request the developer to resolve Code Coverage issues",
+        "B": "Request the developer to resolve Security Rating issues",
+        "C": "Override this build step and proceed with deployment",
+        "D": "Start a new Deployment Pipeline with manual override"
+      },
+      "correct_answer": "A and B",
+      "explanation": "Request the developer to resolve Code Coverage issues and Request the developer to resolve Security Rating issues. Code Coverage at 10% is too low (best practice requires 60-80%), and Security Rating of C indicates vulnerabilities. Both issues should be fixed before proceeding to ensure a stable and secure UAT testing environment.",
+      "study_notes": "Cloud Manager quality gates: Fix security and code coverage issues before deployment"
+    },
+    {
+      "id": "Q80",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A DevOps engineer needs to analyze response performance from AEM. Log files can be extracted from the AEM environment. Which logfile should be analyzed?",
+      "options": {
+        "A": "request.log",
+        "B": "access.log",
+        "C": "response.log",
+        "D": "replication.log"
+      },
+      "correct_answer": "A",
+      "explanation": "request.log captures details of each request made to AEM, records response times to help diagnose slow responses, and provides insight into processing delays, request load, and bottlenecks. This makes it the most relevant log file for analyzing response performance.",
+      "study_notes": "Performance analysis: request.log for response time analysis"
+    },
+    {
+      "id": "Q81",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer is managing an AEM as a Cloud Service Sites environment for a customer. They are in the final stages of going live and only have a couple of release candidates to go. During regular testing using an on-premise code quality check, all requirements were passed. Running the pipeline and a deployment to the AEM as a Cloud Service instances shows that the code quality check did not pass. The code flagged produces the following issue: @Property(label = \"Service Password\", value = \"mysecretpassword\") private static final String PROP_SERVICE_PASSWORD = \"password\"; What should the DevOps engineer do?",
+      "options": {
+        "A": "Contact support to bypass the pipeline step in Cloud Manager",
+        "B": "Suppress the warning in Cloud Manager using @SuppressWarnings(\"squid:S2068\")",
+        "C": "Inform the development team and ask them to remove the password",
+        "D": "Override the code quality gate and proceed"
+      },
+      "correct_answer": "C",
+      "explanation": "Inform the development team and ask them to remove the password. Hardcoded passwords in source code are security vulnerabilities that should never be deployed to production. The development team must remove the hardcoded password and use proper configuration management instead.",
+      "study_notes": "Code quality: Remove hardcoded passwords from source code"
+    },
+    {
+      "id": "Q82",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer is monitoring an Adobe Managed Services AEM Sites environment. AEM Sites is being run for the customer. During the performance tests conducted via Cloud Manager, the DevOps engineer notices high CPU utilization. What should the DevOps engineer do?",
+      "options": {
+        "A": "Log in to the server using SSH on production, then rerun the test and run top in parallel",
+        "B": "Create a support ticket to the CSE to provide the logs of AEM from during the test run",
+        "C": "Connect VisualGC to the JVM using JMX while running the tests to gather JVM CPU usage",
+        "D": "Use Cloud Manager monitoring to analyze CPU usage"
+      },
+      "correct_answer": "B",
+      "explanation": "Create a support ticket to the CSE to provide the logs of AEM from during the test run. In AMS, customers don't have direct SSH access to production environments, and JMX is not enabled for security reasons. The correct approach is to work with Adobe's Customer Support Engineering team to analyze logs and identify performance bottlenecks.",
+      "study_notes": "AMS monitoring: Work with CSE for performance analysis"
+    },
+    {
+      "id": "Q83",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "On the weekend, a DevOps engineer is notified that an emergency code fix must be installed on the company's Adobe Managed Services production publish instances to avoid an imminent system down issue. The DevOps engineer needs to engage Adobe Managed Services team via the Admin console to execute this request. Which priority level should be assigned for this Support Case?",
+      "options": {
+        "A": "P3 Interruptions to normal operations",
+        "B": "P2 Serious interruptions to normal operations",
+        "C": "P4 Minimal or no interruptions to normal operations",
+        "D": "P1 Critical"
+      },
+      "correct_answer": "D",
+      "explanation": "P1 Critical. An imminent system down issue affecting production publish instances requires immediate attention and qualifies as a critical priority. This ensures the fastest response time from Adobe's support team to prevent system downtime.",
+      "study_notes": "Support priority: P1 Critical for imminent system down issues"
+    },
+    {
+      "id": "Q84",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to add functionality to allow developers to start Cloud Manager builds from their local environments via a bash script or IDE plugin. What should the DevOps engineer add after creating an Adobe I/O project?",
+      "options": {
+        "A": "An API for Cloud Manager",
+        "B": "A plugin for Cloud Manager",
+        "C": "An Event for Cloud Manager",
+        "D": "A webhook for Cloud Manager"
+      },
+      "correct_answer": "A",
+      "explanation": "An API for Cloud Manager. To allow developers to trigger Cloud Manager builds from their local environments, the DevOps engineer must integrate with the Cloud Manager API. This enables automation of build and deployment triggers from external tools and supports authentication via Adobe I/O.",
+      "study_notes": "Cloud Manager integration: Use API for external build triggers"
+    },
+    {
+      "id": "Q85",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "One week ago, a P3 ticket was closed. The ticket contains all pertinent information about the issue and the corresponding resolution. Today, the exact issue is happening. The resolution is not working. What should the DevOps engineer do?",
+      "options": {
+        "A": "Open a new ticket",
+        "B": "Escalate via the Actions section",
+        "C": "Reopen the same ticket",
+        "D": "Contact support directly"
+      },
+      "correct_answer": "C",
+      "explanation": "Reopen the same ticket. Within 14 days of closure, tickets can be reopened to continue the same issue. After 14 days, Customer Success opens a new ticket. Since it's been one week, the DevOps engineer should reopen the existing ticket with the same issue details.",
+      "study_notes": "Support tickets: Reopen within 14 days, new ticket after 14 days"
+    },
+    {
+      "id": "Q86",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "Developers add a content package module named \"ui.utils\" to the Maven project. The module provides debugging servlets for use in testing features for a website hosted on AEM as a Cloud Service. These servlets are not secured and should not be deployed to the production Cloud Service environment. What should the DevOps engineer add?",
+      "options": {
+        "A": "Add \" element identifying the \"ui.utils\" artifact and a matching \" element to the \"all\" package pom.xml with a target path of /apps/mysite-packages/application/install",
+        "B": "Add a \" element in the \"ui.utils\" pom.xml that adds the \"all\" to the ui.utils package properties, which is activated when an env variable is set to a particular value",
+        "C": "Add a pipeline to the team's CI service that builds the ui.utils content package and uploads it to the Author server's CRX Package Manager servlet after receiving a successful response from a Cloud Manager webhook",
+        "D": "Add a Maven profile to exclude ui.utils from production builds"
+      },
+      "correct_answer": "B",
+      "explanation": "Add a \" element in the \"ui.utils\" pom.xml that adds the \"all\" to the ui.utils package properties, which is activated when an env variable is set to a particular value. Maven profiles allow conditional builds based on environment, ensuring debugging servlets are only included in development/testing but excluded from production.",
+      "study_notes": "Maven profiles: Use environment-based activation for conditional deployment"
+    },
+    {
+      "id": "Q87",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A customer wants duplicate assets detected regardless of filenames as they upload to AEM Asset. How should the DevOps engineer set up the configuration?",
+      "options": {
+        "A": "In the ui.apps project, locate the config folder that targets the runmode and create a new .cfg.json file in /apps with the following: {\"enabled\":true, \"detectMetadataField\" :\"dam:sha1\" }",
+        "B": "In the ui.config project, locate the /conf/global/settings/dam folder that targets the runmode and create a new cfg.json file in /config/dam with the following: {\"enabled\":true, \"detectMetadataField\" :\"dam:sha1\"}",
+        "C": "In the ui.apps project, locate the config folder that targets the runmode and create a new .cfg.json file in /apps with the following: {\"detect_duplicate\": true, \"detectMetadataField\": \"dam:sha1\" }",
+        "D": "In the ui.config project, locate the /conf/global/settings/dam folder and create a new cfg.json file with the following: {\"detect_duplicate\": true, \"detectMetadataField\": \"dam:sha1\"}"
+      },
+      "correct_answer": "C",
+      "explanation": "In the ui.apps project, locate the config folder that targets the runmode and create a new .cfg.json file in /apps with the following: {\"detect_duplicate\": true, \"detectMetadataField\": \"dam:sha1\" }. AEM Assets uses SHA-1 hash (dam:sha1) to detect duplicate assets, ensuring identical binary files are recognized even if filenames differ.",
+      "study_notes": "Asset duplicate detection: Configure detect_duplicate with dam:sha1 metadata field"
+    },
+    {
+      "id": "Q88",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A customer of AEM as a Cloud Service accidentally releases a feature to production much earlier than planned. The decision has been made to roll back the environment to the previous release. What should the DevOps engineer do?",
+      "options": {
+        "A": "1. Click \"Reinstall\" in Package Manager for all packages from the previous release. 2. Trigger the \"Publish content tree\" workflow for the home page and its children.",
+        "B": "1. Copy the most recent git tag by running the command, 'git tag | sort -r | head -n 1'. 2. Reset and force push the production pipeline branch to the copied tag and trigger the pipeline.",
+        "C": "1. Find the most recent successful production pipeline on the Activity tab in Cloud Manager and copy the git tag. 2. Reset and force push the production pipeline branch to the copied tag and trigger the pipeline.",
+        "D": "1. Restore the previous Revision from the Version History panel of the home page in AEM Sites. 2. Trigger the \"Publish content tree\" workflow for the home page and its children."
+      },
+      "correct_answer": "C",
+      "explanation": "1. Find the most recent successful production pipeline on the Activity tab in Cloud Manager and copy the git tag. 2. Reset and force push the production pipeline branch to the copied tag and trigger the pipeline. AEM as a Cloud Service follows a Git-based deployment model, and rolling back requires redeploying the previous successful commit through Cloud Manager.",
+      "study_notes": "Cloud Service rollback: Use Git-based deployment through Cloud Manager"
+    },
+    {
+      "id": "Q89",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A customer of AEM as a Cloud Service is planning to launch a major site redesign. The customer is concerned about the possible impact of the refactored code base on a number of different web quality metrics, including performance, accessibility, and search engine optimization. The DevOps engineer needs to respond to these concerns. What should the DevOps engineer do?",
+      "options": {
+        "A": "Request an Expert Session in Admin Console to schedule real-time performance monitoring during the launch",
+        "B": "Reduce the \"95th percentile response time\" KPI value in order to detect issues more quickly",
+        "C": "Add high value site pages to the Production Pipeline Experience Audit list",
+        "D": "Enable additional monitoring in Cloud Manager"
+      },
+      "correct_answer": "C",
+      "explanation": "Add high value site pages to the Production Pipeline Experience Audit list. AEM as a Cloud Service includes Experience Audit as part of the Cloud Manager Production Pipeline, which evaluates key web quality metrics such as performance, accessibility, and SEO. Adding high-value pages ensures critical site areas are automatically tested before deployment.",
+      "study_notes": "Cloud Service quality: Use Experience Audit for web quality metrics"
+    },
+    {
+      "id": "Q90",
+      "topic": "Cloud Service",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "A DevOps engineer needs to configure a new program in an Adobe Managed Services instance. The customer expects consistent traffic of approximately 10,000 page views per minute on the Production CDN with a caching ratio of 95%. The Production environment will have 4 dispatcher/publish servers. The Staging environment will have 1 dispatcher/publish server. How should the DevOps engineer configure the new program?",
+      "options": {
+        "A": "Set the \"95th percentile response time\" KPI to the recommended value of 3 seconds and the \"Page Views per Minute\" KPI to 9,500",
+        "B": "Enable the On-demand scaling policy for the Non-Production Environment and set \"Max additional Publish-Dispatcher segments allowed\" to 1",
+        "C": "Enable the On-demand scaling policy for the Non-Production Environment and set \"Max additional Publish-Dispatcher segments allowed\" to 3",
+        "D": "Set the \"95th percentile response time\" KPI to the recommended value of 3 seconds and the \"Page Views per Minute\" KPI to 2,500"
+      },
+      "correct_answer": "D",
+      "explanation": "Set the \"95th percentile response time\" KPI to the recommended value of 3 seconds and the \"Page Views per Minute\" KPI to 2,500. With 95% cache ratio, only 5% of requests hit the backend (500 requests/minute per server). With 4 servers, this equals 2,000 total backend hits, so 2,500 provides buffer for spikes. 3 seconds for 95th percentile is the standard recommendation.",
+      "study_notes": "AMS configuration: Calculate backend traffic based on cache hit ratio"
+    },
+    {
+      "id": "Q91",
+      "topic": "CRX/Oak",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "How should a DevOps engineer increase offline tar compaction performance?",
+      "options": {
+        "A": "Set -Dcompaction-progress-log to 1",
+        "B": "Set \"> /dev/nul 2>&1\"",
+        "C": "Set -Dtar.memoryMapped to true",
+        "D": "Increase memory allocated to the Java container"
+      },
+      "correct_answer": "C",
+      "explanation": "Set -Dtar.memoryMapped to true. Memory mapping allows direct memory access to files, reduces copying between kernel and user space, and can significantly improve I/O performance. This provides the most effective way to increase offline tar compaction performance through optimized I/O operations.",
+      "study_notes": "Oak compaction: Use memory mapping for improved I/O performance"
+    },
+    {
+      "id": "Q92",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A DevOps engineer needs to take a publish instance out of the loadbalancing for maintenance so that it does not answer requests. Which step should the DevOps engineer take regarding replication of content?",
+      "options": {
+        "A": "Stop the replication queue",
+        "B": "Deactivate the replication agent for this publish instance",
+        "C": "Disable the replication agent for this publish instance",
+        "D": "Stop the replication bundle"
+      },
+      "correct_answer": "C",
+      "explanation": "Disable the replication agent for this publish instance. This prevents replication during maintenance while maintaining configuration for easy re-enabling. It's the appropriate level of intervention for maintenance work and is specific to the instance being maintained.",
+      "study_notes": "Maintenance: Disable replication agent for specific instance"
+    },
+    {
+      "id": "Q93",
+      "topic": "Maintenance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "You are configuring backup for the first time. Which backup strategy should a DevOps engineer use?",
+      "options": {
+        "A": "One complete repository backup and one content package backup via CRX for quick restore on author AEM instance",
+        "B": "One complete repository backup and one content package backup via CRX for quick restore on each AEM instance",
+        "C": "Single complete repository backup on each AEM instance",
+        "D": "Different backup packages for different content via the CRX package on each AEM instance"
+      },
+      "correct_answer": "C",
+      "explanation": "Single complete repository backup on each AEM instance. A complete repository backup captures JCR content, system configurations, workflows, indexes, user data, and everything in the repository. This provides a full snapshot that can restore the entire AEM instance to a known working state without additional steps.",
+      "study_notes": "Backup strategy: Use complete repository backup for full system restore"
+    },
+    {
+      "id": "Q94",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "How should a DevOps engineer configure against Cross Site Request Forging attacks?",
+      "options": {
+        "A": "Send the proper X-Frame-Options HTTP response headers that instruct the browser to disallow framing from other domains",
+        "B": "Set Access-Control-Allow-Origin to wildcard",
+        "C": "Create a filter to allow /libs/granite/csrf/token.json path and CSRF-Token header in dispatcher",
+        "D": "Configure SSL certificates for all domains"
+      },
+      "correct_answer": "C",
+      "explanation": "Create a filter to allow /libs/granite/csrf/token.json path and CSRF-Token header in dispatcher. AEM has built-in CSRF protection that relies on CSRF tokens obtained from /libs/granite/csrf/token.json and validated via CSRF-Token header. This approach aligns with Adobe's best practices for CSRF protection.",
+      "study_notes": "CSRF protection: Allow CSRF token path and header in dispatcher"
+    },
+    {
+      "id": "Q95",
+      "topic": "Maintenance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "Which three regular maintenance tasks should be executed and scheduled regularly? (Choose three.)",
+      "options": {
+        "A": "Workflow purge",
+        "B": "User cache purge",
+        "C": "Version purging",
+        "D": "Audit log purge"
+      },
+      "correct_answer": "A, C, D",
+      "explanation": "Workflow purge, Version purging, and Audit log purge. These three tasks are essential regular maintenance activities: Workflow purge removes completed workflow instances to prevent database growth, Version purging removes old content versions to manage content history and prevent repository bloat, and Audit log purge cleans up audit logs to prevent accumulation and maintain system health.",
+      "study_notes": "Maintenance tasks: Schedule workflow purge, version purging, and audit log purge"
+    },
+    {
+      "id": "Q96",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "When running an AEM instance in Production Ready Mode, which two security measures are applied? (Choose two.)",
+      "options": {
+        "A": "The CRXDE Support bundle (com.adobe.granite.crxde-support) is disabled",
+        "B": "Author user account is disabled on publish instances",
+        "C": "WebDAV Access to repositories will only be available on author instances",
+        "D": "HTTPS transport layer is enabled"
+      },
+      "correct_answer": "A and B",
+      "explanation": "The CRXDE Support bundle (com.adobe.granite.crxde-support) is disabled and Author user account is disabled on publish instances. Production Ready Mode applies security hardening measures including disabling development tools like CRXDE and preventing author access on publish instances to enhance security.",
+      "study_notes": "Production Ready Mode: Disables CRXDE and author access on publish"
+    },
+    {
+      "id": "Q97",
+      "topic": "Maintenance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "Given the Sling log rotation configuration, which two controls should be used for the rotation of the log? (Choose two.)",
+      "options": {
+        "A": "A time/date schedule",
+        "B": "A maximum file size",
+        "C": "A system task",
+        "D": "A system cron file"
+      },
+      "correct_answer": "A and B",
+      "explanation": "A time/date schedule and A maximum file size. Sling log rotation uses both time-based rotation (allowing regular rotation intervals at specific times for predictable maintenance) and size-based rotation (preventing logs from growing too large with automatic rotation when size limit is reached for space management).",
+      "study_notes": "Log rotation: Use time/date schedule and maximum file size controls"
+    },
+    {
+      "id": "Q98",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "After deployment, publishers still show old static pictures. Which action must a DevOps engineer take to fix this issue?",
+      "options": {
+        "A": "Reset Dispatcher Cache",
+        "B": "Restart Dispatcher",
+        "C": "Restart Load Balancer",
+        "D": "Restart AEM"
+      },
+      "correct_answer": "A",
+      "explanation": "Reset Dispatcher Cache. Static files are cached by dispatcher, and the cache needs clearing to serve new versions. Resetting the dispatcher cache forces it to fetch fresh content from the publishers without requiring service restarts, making it the quickest and correct solution.",
+      "study_notes": "Dispatcher troubleshooting: Reset cache to serve updated content"
+    },
+    {
+      "id": "Q99",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A client is submitting a form that contains a CSRF token that is passed using the 'CSRF-Token' HTTP header. When looking at the web server access logs the header is printed out, but on the AEM instance the value is not present in the request. What should the DevOps engineer configure to make the values available on the AEM instance?",
+      "options": {
+        "A": "Add \"Header set CSRF-Token\" in the virtual host configuration",
+        "B": "Add 'X-Forwarded-Header: CSRF-Token' in the virtual host configuration",
+        "C": "Add the /clientheaders { \"CSRF-Token\" }' in the dispatcher configuration",
+        "D": "Add 'filter /0001 {/type \"allow\" /glob \"CSRF-Token\" }' in the dispatcher configuration"
+      },
+      "correct_answer": "C",
+      "explanation": "Add the /clientheaders { \"CSRF-Token\" }' in the dispatcher configuration. The /clientheaders section explicitly allows header pass-through and is the standard way to forward headers. This tells dispatcher to forward the CSRF-Token header to AEM for proper CSRF validation.",
+      "study_notes": "Dispatcher config: Use /clientheaders to forward CSRF-Token header"
+    },
+    {
+      "id": "Q100",
+      "topic": "OSGi",
+      "type": "Practice Question",
+      "difficulty": "Hard",
+      "question": "A page cannot be rendered (HTTP response 500). The log file shows a NullPointerException. The source code points to a missing OSGi service \"NavigationService\" The code uses @Reference to inject this service. What are four possible causes of this issue? (Choose four.)",
+      "options": {
+        "A": "The bundle that contains the implementation of the NavigationService is in state INSTALLED",
+        "B": "The bundle that contains the implementation of the NavigationService is in state ACTIVE",
+        "C": "The bundle that contains the implementation of the NavigationService is in state RESOLVED",
+        "D": "The implementation of the SCR component has unsatisfied references"
+      },
+      "correct_answer": "The bundle that contains the implementation shows different versions in \"Bundle Location\" string compared to \"Version\" as shown in Felix Console",
+      "explanation": "The interface NavigationService and the implementation of the NavigationService reside in different bundles",
+      "study_notes": "The @Reference annotation was invalidly used in a class that is not a SCR component"
+    },
+    {
+      "id": "Q101",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to install a package to a remote AEM staging system using continuous deployment. Which two tools and methods should the DevOps engineer use? (Choose two.)",
+      "options": {
+        "A": "make file with aem-deploy plugin",
+        "B": "apache ant aem-deploy plugin",
+        "C": "content package maven plugin",
+        "D": "curl based script with package manager REST API"
+      },
+      "correct_answer": "C and D",
+      "explanation": "content package maven plugin and curl based script with package manager REST API. The Content Package Maven Plugin is the standard tool for AEM deployment that integrates with CI/CD, while curl with Package Manager REST API provides flexible scripting options for direct interaction with AEM. Both solutions provide remote deployment capability, automation support, and integration with CI/CD.",
+      "study_notes": "Package deployment: Use Maven plugin or REST API with curl"
+    },
+    {
+      "id": "Q102",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Cloning an AEM instance to perform tests on production content, also called back-staging, is often required. Which three must be reconfigured after the cloning is complete? (Choose three.)",
+      "options": {
+        "A": "The replication and/or flush agent target IP",
+        "B": "The clustr_node.id",
+        "C": "The run modes",
+        "D": "The environment specific OSGi configurations"
+      },
+      "correct_answer": "A, B, D",
+      "explanation": "The replication and/or flush agent target IP, The clustr_node.id, and The environment specific OSGi configurations. After cloning, replication agent IPs must point to new environment's publish/dispatcher to prevent sending to production servers, cluster_node.id must be unique to prevent cluster conflicts, and environment-specific OSGi configurations must match the new environment for proper functioning.",
+      "study_notes": "Instance cloning: Reconfigure replication IPs, node ID, and OSGi configs"
+    },
+    {
+      "id": "Q103",
+      "topic": "OSGi",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "A DevOps engineer needs to verify that a bundle has been installed correctly. The DevOps engineer points to \"system/console/bundles\" and receives an \"HTTP ERROR: 403\". What is the cause of this error?",
+      "options": {
+        "A": "The bundle was not installed correctly",
+        "B": "An AEM restart is required to perform post-installation actions",
+        "C": "The DevOps engineer did not authenticate to the server",
+        "D": "The DevOps engineer needs to check the error.log file to find out what happened"
+      },
+      "correct_answer": "C",
+      "explanation": "The DevOps engineer did not authenticate to the server. HTTP 403 indicates forbidden access due to authentication issues. The AEM Web Console (/system/console/bundles) requires administrator permissions to access, so the DevOps engineer must log in using admin credentials before accessing the console.",
+      "study_notes": "OSGi console access: Requires authentication for admin access"
+    },
+    {
+      "id": "Q104",
+      "topic": "CRX/Oak",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "Which tool should be leveraged to fix a corrupted repository?",
+      "options": {
+        "A": "oak-core",
+        "B": "oak-backup",
+        "C": "oak-backup-run",
+        "D": "oak-run"
+      },
+      "correct_answer": "D",
+      "explanation": "oak-run is the primary tool used to analyze, check, and fix corrupted AEM Oak repositories. It provides various commands for backup, restore, indexing, and repository consistency checks. Commands like 'java -jar oak-run.jar check <repository-path>' or 'java -jar oak-run.jar repair <repository-path>' can be used to fix repository corruption.",
+      "study_notes": "Repository repair: Use oak-run tool for corruption fixes"
+    },
+    {
+      "id": "Q105",
+      "topic": "Maintenance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "When should a DevOps engineer schedule maintenance tasks?",
+      "options": {
+        "A": "During a backup window",
+        "B": "During planned downtimes",
+        "C": "During other maintenance tasks",
+        "D": "During out of office hours"
+      },
+      "correct_answer": "B",
+      "explanation": "During planned downtimes. Planned downtimes are pre-scheduled periods when maintenance tasks can be performed without disrupting business operations, ensuring minimal impact on users and services while allowing critical maintenance to be completed safely. This ensures proper coordination with stakeholders.",
+      "study_notes": "Maintenance scheduling: Use planned downtimes for minimal disruption"
+    },
+    {
+      "id": "Q106",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "What must a DevOps engineer do to install an AEM instance as an author?",
+      "options": {
+        "A": "Provide java property instance.type=author",
+        "B": "Set run mode for author in an OSGI console after the first start",
+        "C": "Change the name of the jar file to have author as run mode",
+        "D": "Provide the run mode \"author\" on a first installation"
+      },
+      "correct_answer": "D",
+      "explanation": "Provide the run mode \"author\" on a first installation. To install AEM as an author instance, use 'java -jar aem-quickstart.jar -r author'. The run mode must be explicitly provided during the first installation and cannot be changed after installation. This ensures the AEM instance runs as an Author from the very beginning.",
+      "study_notes": "AEM installation: Use -r author parameter for author instance"
+    },
+    {
+      "id": "Q107",
+      "topic": "Configuration",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "Which three sets of run modes is correct for a supported storage element in AEM? (Choose three.)",
+      "options": {
+        "A": "crx3,crx3mongomk",
+        "B": "crx3,crx3rdb",
+        "C": "crx3,crx3oracle",
+        "D": "crx3,crx3tarmk"
+      },
+      "correct_answer": "crx3,crx3tar",
+      "explanation": "crx3,crx3mongo",
+      "study_notes": "B, D, F"
+    },
+    {
+      "id": "Q108",
+      "topic": "CI/CD",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "DevOps engineer is configuring a non-production deployment pipeline. The code quality is checked in the build pipeline. A security check is configured in the deployment pipeline to identify any major security issues before a production deployment. Which other check should be executed before deployment to production",
+      "options": {
+        "A": "An OSGi configuration validity check for the new release",
+        "B": "A dispatcher invalidation rule check for replication functionality",
+        "C": "A sling models validation check for the new release",
+        "D": "A performance check for the actual release functionality"
+      },
+      "correct_answer": "D",
+      "explanation": "A performance check for the actual release functionality. Performance validation is crucial before production as it validates actual runtime behavior, catches performance regressions, tests under real conditions, and is essential before production release. This complements the existing code quality and security checks in the pipeline.",
+      "study_notes": "Pipeline quality gates: Add performance check before production"
+    },
+    {
+      "id": "Q109",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "When configuring the dispatcher module, what setting is required to make sure the dispatcher is used?",
+      "options": {
+        "A": "SetModule module-dispatcher",
+        "B": "SetHandler dispatcher-module",
+        "C": "SetModule handler-dispatcher",
+        "D": "SetHandler dispatcher-handler"
+      },
+      "correct_answer": "D",
+      "explanation": "SetHandler dispatcher-handler. This is the Apache configuration directive required to enable the dispatcher module. The SetHandler directive tells Apache to use the dispatcher module to handle requests for the configured location, using the correct handler name 'dispatcher-handler'.",
+      "study_notes": "Dispatcher configuration: Use SetHandler dispatcher-handler directive"
+    },
+    {
+      "id": "Q110",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer needs to install bundles via content packages for a continuous deployment setup. In which two ways should this be configured? (Choose two.)",
+      "options": {
+        "A": "Before the deployment of the new bundle, remove the old bundle from JCR as first deployment step to make sure the bundle is updated",
+        "B": "To install bundles for a certain runmode only, the folder name can be used to limit environments where a bundle is installed",
+        "C": "For an out-of-the-box installation, bundles can be installed from /apps./libs and /etc",
+        "D": "The JCR installer will only update the bundle if the filename changes; always use a unique bundle version in the filename"
+      },
+      "correct_answer": "The JCR installer detects bundle changes at arbitrary depths in the JCR tree and automatically deploys those changes bundles",
+      "explanation": "Whenever the JCR installer detects a change of a bundle file, it will install it to the Felix runtime",
+      "study_notes": "B and F"
+    },
+    {
+      "id": "Q111",
+      "topic": "Deployment",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "In the replication agent configuration, what is the purpose of 'Agent User Id'?",
+      "options": {
+        "A": "To label the replication agent that is shown in the web UI",
+        "B": "To authenticate on the publish instance",
+        "C": "To set the user that is used to replicate the content to the publish instance",
+        "D": "To configure this user to select specific content for the replication"
+      },
+      "correct_answer": "C",
+      "explanation": "To set the user that is used to replicate the content to the publish instance. The Agent User Id specifies the user identity under which the replication process runs, determining permissions and access rights when replicating content from author to publish instances, ensuring only authorized content is replicated based on the user's permissions.",
+      "study_notes": "Replication agent: Agent User Id sets replication user permissions"
+    },
+    {
+      "id": "Q112",
+      "topic": "Development",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A DevOps engineer receives a blank page in the browser while the log file prints \"No renderer for extension htm!\". What is a potential cause of this issue?",
+      "options": {
+        "A": "The content path is not configured to deliver HTML renderings",
+        "B": "The apache dispatcher does not send the correct format header",
+        "C": "The path for the resource type as declared by the content node does not exist",
+        "D": "The resource super type declaration is missing on the content node"
+      },
+      "correct_answer": "C",
+      "explanation": "The path for the resource type as declared by the content node does not exist. The error \"No renderer for extension htm!\" indicates that AEM does not know how to render the requested resource, typically when the resource type assigned to the content node does not have a corresponding rendering script (HTL, JSP, or servlet).",
+      "study_notes": "AEM rendering: Missing resource type path causes renderer errors"
+    },
+    {
+      "id": "Q113",
+      "topic": "Dispatcher",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "A request, /home_page?tab=1, is received on the dispatcher with a parameter. This request is not cached, but should be. Which configuration in the dispatcher should be added to make sure such requests are cached in the future?",
+      "options": {
+        "A": "/cacheRequests {/0001 { /glob \"*\"/type \"deny\" }/0002 {/glob \"tab\" /type \"permit\" }}",
+        "B": "/ignoreUrlParams {/0001 { /glob \"*\"/type \"deny\" }/0002 {/glob \"?tab=1\" /type \"allow\" }}",
+        "C": "/allowCaching{ /0001 { /glob \"*\"/type \"deny\" }/0002 {/glob \"tab\" /type \"cache\" }}",
+        "D": "/ignoreUrlParams {/0001 {/glob \"*\"/type \"deny\"} /0002 {/glob \"tab\" /type \"allow\" }}"
+      },
+      "correct_answer": "D",
+      "explanation": "/ignoreUrlParams {/0001 {/glob \"*\"/type \"deny\"} /0002 {/glob \"tab\" /type \"allow\" }}. By default, AEM Dispatcher does not cache requests that contain URL parameters unless explicitly configured. This configuration denies all parameters by default and explicitly allows \"tab\" to be ignored for caching, so requests like /home_page?tab=1 will be treated the same as /home_page for caching purposes.",
+      "study_notes": "Dispatcher caching: Use /ignoreUrlParams to cache requests with parameters"
+    },
+    {
+      "id": "Q114",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "The log files contain the error \"Too many files\", and CRX is not responding. What should a DevOps engineer do to increase the open files limit?",
+      "options": {
+        "A": "Restart AEM 6.x with a higher number of value in start.sh --fs.file.max=value",
+        "B": "AEM 6.x automatically handles such a limit and increase the limit dynamically during the next restart",
+        "C": "Set new Java Virtual Machine limits by -Djava.fs.file-max= and restart AEM",
+        "D": "Check the CRX process user limit for maximum open files, and run ulimit to set higher values"
+      },
+      "correct_answer": "D",
+      "explanation": "Check the CRX process user limit for maximum open files, and run ulimit to set higher values. The \"Too many files\" error indicates that the operating system has hit the limit for open file descriptors, which is controlled by ulimit settings. The best approach is to check the current limit with 'ulimit -n' and increase it temporarily or permanently via limits.conf.",
+      "study_notes": "File descriptor limit: Use ulimit to increase open files limit"
+    },
+    {
+      "id": "Q115",
+      "topic": "Performance",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "When configuring the Java Virtual Machine (VM), which setting configures the JVM heap size?",
+      "options": {
+        "A": "xmx and jvmx",
+        "B": "xms and xmx",
+        "C": "xss and jvms",
+        "D": "xms and jhs"
+      },
+      "correct_answer": "B",
+      "explanation": "xms and xmx. The JVM heap size is configured using -Xms (sets initial heap size) and -Xmx (sets maximum heap size). For example, '-Xms2048m -Xmx4096m' sets initial heap to 2GB and maximum heap to 4GB. These are fundamental JVM memory configuration parameters used in AEM deployments.",
+      "study_notes": "JVM configuration: Use -Xms and -Xmx for heap size settings"
+    },
+    {
+      "id": "Q116",
+      "topic": "Security",
+      "type": "Practice Question",
+      "difficulty": "Medium",
+      "question": "How should a DevOps engineer prevent Denial of Service (DoS) attacks against AEM 6.x instances?",
+      "options": {
+        "A": "By implementing a web application firewall and installing the latest security hotfixes",
+        "B": "By configuring Sling, Adobe Dispatcher, a web application firewall, installing the latest security hotfixes and implementing a protected network environment",
+        "C": "By leaving the Adobe Dispatcher set to the default configuration and installing the latest security hotfixes",
+        "D": "By implementing a protected network environment installing the latest security hotfixes"
+      },
+      "correct_answer": "B",
+      "explanation": "By configuring Sling, Adobe Dispatcher, a web application firewall, installing the latest security hotfixes and implementing a protected network environment. A multi-layered security approach is the best defense against DoS attacks, including Sling configuration for rate limiting, Dispatcher for IP whitelisting and caching, WAF for blocking malicious traffic, security hotfixes for vulnerabilities, and protected network environment for access restrictions.",
+      "study_notes": "DoS prevention: Use multi-layered security approach"
+    },
+    {
+      "id": "Q117",
+      "topic": "Monitoring",
+      "type": "Practice Question",
+      "difficulty": "Easy",
+      "question": "When monitoring replication agents, for which two event should a monitoring system provide alerts? (Choose two.)",
+      "options": {
+        "A": "More than 10,000 items in the queue",
+        "B": "403 in the replication log",
+        "C": "Queue blocked",
+        "D": "200 in the replication log"
+      },
+      "correct_answer": "A and C",
+      "explanation": "More than 10,000 items in the queue and Queue blocked. Large queue indicates replication bottleneck and potential content sync issues requiring intervention, while queue blocked is a critical failure condition that stops content publication and requires immediate attention. These conditions are critical monitoring metrics for maintaining system health.",
+      "study_notes": "Replication monitoring: Alert on large queue size and blocked status"
+    }
+  ],
+  "summary": {
+    "topics_covered": [
+      "CI/CD",
+      "Maintenance",
+      "OSGi",
+      "Cloud Service",
+      "Development",
+      "Monitoring",
+      "Performance",
+      "Deployment",
+      "Security",
+      "CRX/Oak",
+      "Configuration",
+      "Dispatcher"
+    ],
+    "difficulty_distribution": {
+      "Easy": 36,
+      "Medium": 65,
+      "Hard": 15
+    },
+    "question_types": {
+      "Flashcard": 4,
+      "Practice Question": 112
+    }
+  }
+}
